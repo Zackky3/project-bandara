@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Nomor Surat Otomatis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f9f9f9;
+    }
+    h2 {
+      color: #333;
+      text-align: center;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #2c7;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #28a745;
+    }
+    table {
+      margin: 30px auto;
+      width: 100%;
+      max-width: 900px;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    #exportWord, #hapusSemua {
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #exportWord:hover {
+      background-color: #0069d9;
+    }
+    #hapusSemua {
+      background-color: #e74c3c;
+    }
+    #hapusSemua:hover {
+      background-color: #c0392b;
+    }
+    #notifikasiNomorSurat {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Form Pembuatan Nomor Surat</h2>
+<form id="formSurat">
+  <label for="startNomor">Mulai Nomor Surat Dari:</label>
+  <input type="number" id="startNomor" name="startNomor" value="1" required>
+
+  <div style="display: flex; gap: 10px; align-items: flex-end;">
+    <div style="flex: 1;">
+      <label for="kode">Kode Klasifikasi:</label>
+      <select id="kode" name="kode" required>
+        <option value="KP">KP (Kepegawaian)</option>
+        <option value="ST">ST (Surat Tugas)</option>
+        <option value="AU">UM (Umum)</option>
+        <option value="PL">PL (Perlengkapan)</option>
+        <option value="SM">SM (Surat Masuk)</option>
+        <option value="PM">PM (Penanaman Modal)</option>
+        <option value="HK">HK (Hukum)</option>
+      </select>
+    </div>
+    <div style="flex: 1;">
+      <label for="kodeDepan">Kode Depan:</label>
+      <input type="text" id="kodeDepan" name="kodeDepan" placeholder="Misal: 002" inputmode="numeric" pattern="\d*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+    </div>
+  </div>
+
+  <label for="lembar">Lembar Surat:</label>
+  <input type="number" id="lembar" name="lembar" value="1" required>
+
+  <label for="unit">Unit Pengirim (misal TPK):</label>
+  <input type="text" id="unit" name="unit" required>
+
+  <label for="judul">Judul Surat:</label>
+  <input type="text" id="judul" name="judul" required>
+
+  <button type="submit">Buat Nomor Surat</button>
+</form>
+
+<div id="notifikasiNomorSurat"></div>
+
+<h2>Daftar Surat</h2>
+<table id="daftarSurat">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Nomor Surat</th>
+      <th>Judul Surat</th>
+      <th>Tanggal & Waktu Keluar</th>
+      <th>Lembar</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<button id="exportWord">Export ke Word</button>
+<button id="hapusSemua">Hapus Semua Data</button>
+
+<script>
+  const form = document.getElementById("formSurat");
+  const tbody = document.querySelector("#daftarSurat tbody");
+
+  let nomorUrut;
+  let jumlahSurat = 0;
+  let isStartSet = false;
+
+  // ✅ Load data dari localStorage saat awal
+  const savedSurat = JSON.parse(localStorage.getItem("dataSurat")) || [];
+  if (savedSurat.length > 0) {
+    savedSurat.forEach(item => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${item.no}</td>
+        <td>${item.nomor}</td>
+        <td>${item.judul}</td>
+        <td>${item.tanggal}</td>
+        <td>${item.lembar}</td>
+      `;
+      tbody.appendChild(tr);
+      jumlahSurat++;
+    });
+    nomorUrut = savedSurat[savedSurat.length - 1].no + 1;
+    isStartSet = true;
+    form.startNomor.value = nomorUrut;
+    form.lembar.value = Math.ceil(jumlahSurat / 9);
+  }
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    if (!isStartSet) {
+      nomorUrut = parseInt(form.startNomor.value);
+      isStartSet = true;
+    }
+
+    const kode = form.kode.value;
+    const kodeDepan = form.kodeDepan.value.trim();
+    const unit = form.unit.value.toUpperCase();
+    const judul = form.judul.value;
+    const now = new Date();
+
+    const tahun = now.getFullYear();
+    const tanggal = now.toISOString().split("T")[0];
+    const jam = now.getHours().toString().padStart(2, '0');
+    const menit = now.getMinutes().toString().padStart(2, '0');
+    const waktuLengkap = `${tanggal} ${jam}:${menit}`;
+
+    jumlahSurat++;
+    const lembar = Math.ceil(jumlahSurat / 9);
+    const nomorSurat = `${kode}${kodeDepan ? '.' + kodeDepan : ''}/${lembar}/${nomorUrut}/${unit}-${tahun}`;
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${nomorUrut}</td>
+      <td>${nomorSurat}</td>
+      <td>${judul}</td>
+      <td>${waktuLengkap}</td>
+      <td>${lembar}</td>
+    `;
+    tbody.appendChild(tr);
+
+    document.getElementById("notifikasiNomorSurat").textContent = `Nomor surat terbaru: ${nomorSurat}`;
+
+    // ✅ Simpan ke localStorage
+    savedSurat.push({
+      no: nomorUrut,
+      nomor: nomorSurat,
+      judul: judul,
+      tanggal: waktuLengkap,
+      lembar: lembar
+    });
+    localStorage.setItem("dataSurat", JSON.stringify(savedSurat));
+
+    nomorUrut++;
+    if (nomorUrut > 25) nomorUrut = 1;
+
+    form.reset();
+    form.startNomor.value = nomorUrut;
+    form.lembar.value = lembar;
+  });
+
+  document.getElementById("exportWord").addEventListener("click", function () {
+    const rows = document.querySelectorAll("#daftarSurat tbody tr");
+    let header = `
+      <html xmlns:o='urn:schemas-microsoft-com:office:office'
+            xmlns:w='urn:schemas-microsoft-com:office:word'
+            xmlns='http://www.w3.org/TR/REC-html40'>
+      <head><title>Export HTML to Word</title>
+      <style>
+        @page Section1 {
+          size:29.7cm 21cm;
+          mso-page-orientation:landscape;
+          margin:1.5cm;
+        }
+        body {
+          font-family:times new roman, sans-serif;
+          font-size:12pt;
+          line-height:1.5;
+        }
+        div.Section1 { page:Section1; }
+        table {
+          width:100%;
+          border-collapse:collapse;
+          table-layout:fixed;
+          margin-top:10px;
+        }
+        th, td {
+          border:1px solid #000;
+          padding:6px 8px;
+          text-align:left;
+          vertical-align:middle;
+          word-wrap:break-word;
+          height:1.2cm;
+        }
+        th {
+          background-color:#f0f0f0;
+        }
+        .page-break { page-break-before:always; }
+        .judul-section {
+          margin-bottom:10px;
+        }
+      </style>
+      </head><body>`;
+
+    let footer = "</body></html>";
+    let output = "";
+    let kartu = 1;
+    let counter = 0;
+
+    for (let i = 0; i < rows.length; i++) {
+      if (counter % 9 === 0) {
+        if (counter !== 0) {
+          output += "</tbody></table></div><div class='page-break'></div>";
+          kartu++;
+        }
+
+        output += `<div class="Section1">
+          <div class="judul-section">
+            Induk Masalah :<br>
+            Anak Persoalan :<br>
+            Lembar Kartu : ${kartu}
+          </div>
+          <table><thead>
+            <tr>
+              <th>No</th>
+              <th>Nomor Surat</th>
+              <th>Judul Surat</th>
+              <th>Tanggal & Waktu Keluar</th>
+            </tr>
+          </thead><tbody>`;
+      }
+
+      output += `<tr>
+        <td>${rows[i].cells[0].textContent}</td>
+        <td>${rows[i].cells[1].textContent}</td>
+        <td>${rows[i].cells[2].textContent}</td>
+        <td>${rows[i].cells[3].textContent}</td>
+      </tr>`;
+
+      counter++;
+    }
+
+    output += "</tbody></table></div>";
+    const sourceHTML = header + output + footer;
+
+    const source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+    const fileDownload = document.createElement("a");
+    document.body.appendChild(fileDownload);
+    fileDownload.href = source;
+    fileDownload.download = 'Riwayat_Surat.doc';
+    fileDownload.click();
+    document.body.removeChild(fileDownload);
+  });
+
+  // 🔴 Hapus semua data
+  document.getElementById("hapusSemua").addEventListener("click", () => {
+    if (confirm("Yakin ingin menghapus semua data surat?")) {
+      localStorage.removeItem("dataSurat");
+      tbody.innerHTML = "";
+      jumlahSurat = 0;
+      isStartSet = false;
+      nomorUrut = null;
+      form.reset();
+      form.startNomor.value = "";
+      form.lembar.value = "";
+      document.getElementById("notifikasiNomorSurat").textContent = "Semua data telah dihapus.";
+    }
+  });
+</script>
+
+</body>
+</html>
