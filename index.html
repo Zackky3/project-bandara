@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>NOMOR SURAT BANDARA TEUKU CUT ALI</title>
+  <title>Form Nomor Surat Otomatis</title>
   <link href="https://fo.nts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -212,7 +212,7 @@
 </head>
 <body>
 
-  <h2>NOMOR SURAT BANDARA TEUKU CUT ALI</h2>
+  <h2>Form Pembuatan Nomor Surat</h2>
   <form id="formSurat">
     <label for="startNomor">Mulai Nomor Surat Dari:</label>
     <input type="number" id="startNomor" name="startNomor" value="1" required>
@@ -244,7 +244,7 @@
       <option value="IK">KA (Investigasi Kecelakaan)</option>
     </select>
 
-    <label for="kodeKP" id="labelKodeKP" style="display:none; margin-top: 15px;">Kode Klasifikasi KP Detail:</label>
+    <label for="kodeKP" id="labelKodeKP" style="display:none; margin-top: 15px;">Kode Anak Persoalan:</label>
     <select id="kodeKP" name="kodeKP" style="display:none;">
       <optgroup label="Kepegawaian">  
       <option value="KP.001">KP.001 (Data Kepegawaian)</option>
@@ -351,7 +351,7 @@
       </optgroup>
     </select>
 
-    <label for="kodePR" id="labelKodePR" style="display:none; margin-top: 15px;">Kode Klasifikasi PR Detail:</label>
+    <label for="kodePR" id="labelKodePR" style="display:none; margin-top: 15px;">Kode Anak Persoalan:</label>
     <select id="kodePR" name="kodePR" style="display:none;">
       <optgroup label="Perencanaan">
         <option value="PR.001">PR.001 (Rencana Strategis)</option>
@@ -362,7 +362,7 @@
       </optgroup>
     </select>
 
-    <label for="kodeKU" id="labelKodeKU" style="display:none; margin-top: 15px;">Kode Klasifikasi KU Detail:</label>
+    <label for="kodeKU" id="labelKodeKU" style="display:none; margin-top: 15px;">Kode Anak Persoalan:</label>
     <select id="kodeKU" name="kodeKU" style="display:none;">
       <optgroup label="Keuangan">
         <option value="KU.001">KU.001 (Anggaran)</option>
@@ -373,7 +373,7 @@
       </optgroup>
     </select>
 
-    <label for="kodePL" id="labelKodePL" style="display:none; margin-top: 15px;">Kode Klasifikasi PL Detail:</label>
+    <label for="kodePL" id="labelKodePL" style="display:none; margin-top: 15px;">Kode Anak Persoalan:</label>
     <select id="kodePL" name="kodePL" style="display:none;">
       <optgroup label="Perlengkapan">
         <option value="PL.001">PL.001 (Anggaran)</option>
@@ -393,10 +393,12 @@
     <label for="judul">Judul Surat:</label>
     <input type="text" id="judul" name="judul" required>
 
-    <button type="submit">Buat Nomor Surat</button>
+    <button type="submit">📝 Buat Nomor Surat</button>
   </form>
 
   <h2>Daftar Surat</h2>
+  <label for="filterKode">Filter Kode:</label>
+  <input type="text" id="filterKode" placeholder="Masukkan kode, misal KP.001 atau KP" style="margin-bottom: 10px; padding: 5px; width: 200px;">
   <table id="daftarSurat">
     <thead>
       <tr>
@@ -411,16 +413,16 @@
     </tbody>
   </table>
 
-  <button id="exportWord">Export ke Word</button>
-  <button id="hapusSemua" style="display:block; margin: 20px auto; padding: 10px; background-color: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer;">Hapus Semua</button>
+  <button id="exportWord">🖨️ Export ke Word</button>
+  <button id="hapusSemua" style="display:block; margin: 20px auto; padding: 10px; background-color: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer;">🗑️ Hapus Semua</button>
 
 <script>
 const form = document.getElementById("formSurat");
 const tbody = document.querySelector("#daftarSurat tbody");
 
-let nomorUrut;
-let jumlahSurat = 0;
-let isStartSet = false;
+let nomorUrutPerGroup = {};
+let jumlahSuratPerGroup = {};
+let isStartSetPerGroup = {};
 
 function saveData() {
   const rows = [];
@@ -437,38 +439,75 @@ function saveData() {
   localStorage.setItem("daftarSurat", JSON.stringify(rows));
 }
 
-function loadData() {
+function loadData(filterKode = "") {
   const data = localStorage.getItem("daftarSurat");
   if (data) {
     const rows = JSON.parse(data);
+
+    // Group rows by full kode (including kode anak persoalan) before first slash
+    const grouped = {};
     rows.forEach(row => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${row.nomorUrut}</td>
-        <td>${row.nomorSurat}</td>
-        <td>${row.judul}</td>
-        <td>${row.waktuLengkap}</td>
-        <td>${row.lembar}</td>
-      `;
-      tbody.appendChild(tr);
-      jumlahSurat++;
+      const kode = row.nomorSurat.split('/')[0]; // full code like KP.001 or KP
+      if (!grouped[kode]) {
+        grouped[kode] = [];
+      }
+      grouped[kode].push(row);
     });
-    if (rows.length > 0) {
-      nomorUrut = parseInt(rows[rows.length - 1].nomorUrut) + 1;
-      isStartSet = true;
-      form.startNomor.value = nomorUrut;
-      form.lembar.value = rows[rows.length - 1].lembar;
+
+    // Update nomorUrutPerGroup and jumlahSuratPerGroup based on existing data
+    Object.keys(grouped).forEach(kode => {
+      const nomorUrutMax = grouped[kode].reduce((max, row) => {
+        const nomorUrut = parseInt(row.nomorUrut);
+        return nomorUrut > max ? nomorUrut : max;
+      }, 0);
+      nomorUrutPerGroup[kode] = nomorUrutMax + 1;
+      jumlahSuratPerGroup[kode] = grouped[kode].length;
+    });
+
+    // Clear tbody before rendering
+    tbody.innerHTML = "";
+
+    // If filterKode is set, only show that group
+    const keysToShow = filterKode ? [filterKode] : Object.keys(grouped);
+
+    keysToShow.forEach(kode => {
+      if (!grouped[kode]) return;
+
+        // Insert group header row
+        const headerTr = document.createElement("tr");
+        headerTr.classList.add("group-header");
+        headerTr.style.backgroundColor = "#d9eaff";
+        headerTr.style.fontWeight = "600";
+        headerTr.innerHTML = `<td colspan="5">Kode: ${kode}</td>`;
+        tbody.appendChild(headerTr);
+
+      grouped[kode].forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${row.nomorUrut}</td>
+          <td>${row.nomorSurat}</td>
+          <td>${row.judul}</td>
+          <td>${row.waktuLengkap}</td>
+          <td>${row.lembar}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    });
+
+    // Set form startNomor and lembar based on first group or default
+    const firstGroup = keysToShow[0];
+    if (firstGroup && nomorUrutPerGroup[firstGroup]) {
+      form.startNomor.value = nomorUrutPerGroup[firstGroup];
+      form.lembar.value = Math.ceil(jumlahSuratPerGroup[firstGroup] / 9);
+    } else {
+      form.startNomor.value = 1;
+      form.lembar.value = 1;
     }
   }
 }
 
 form.addEventListener("submit", function(e) {
   e.preventDefault();
-
-  if (!isStartSet) {
-    nomorUrut = parseInt(form.startNomor.value);
-    isStartSet = true;
-  }
 
   const kode = form.kode.value;
   const kodeKP = form.kodeKP.value;
@@ -485,10 +524,6 @@ form.addEventListener("submit", function(e) {
   const menit = now.getMinutes().toString().padStart(2, '0');
   const waktuLengkap = `${tanggal} ${jam}:${menit}`;
 
-  jumlahSurat++;
-
-  const lembar = Math.ceil(jumlahSurat / 9);
-
   let kodeFinal = kode;
   if (kode === "KP" && kodeKP) {
     kodeFinal = kodeKP;
@@ -504,7 +539,18 @@ form.addEventListener("submit", function(e) {
     kodeFinal = kodeHK;
   } else if (kode === "UM" && kodeUM) {
     kodeFinal = kodeUM;
-  } 
+  }
+
+  if (!nomorUrutPerGroup[kodeFinal]) {
+    nomorUrutPerGroup[kodeFinal] = parseInt(form.startNomor.value) || 1;
+  }
+  if (!jumlahSuratPerGroup[kodeFinal]) {
+    jumlahSuratPerGroup[kodeFinal] = 0;
+  }
+
+  jumlahSuratPerGroup[kodeFinal]++;
+  const nomorUrut = nomorUrutPerGroup[kodeFinal]++;
+  const lembar = Math.ceil(jumlahSuratPerGroup[kodeFinal] / 9);
 
   const nomorSurat = `${kodeFinal}/${lembar}/${nomorUrut}/${unit}-${tahun}`;
 
@@ -519,20 +565,15 @@ form.addEventListener("submit", function(e) {
 
   tbody.appendChild(tr);
 
-  nomorUrut++;
-
-  if (nomorUrut > 25) {
-    nomorUrut = 1;
-  }
-
   form.reset();
-  form.startNomor.value = nomorUrut;
+  form.startNomor.value = nomorUrutPerGroup[kodeFinal];
   form.lembar.value = lembar;
 
   saveData();
 });
 
-document.getElementById("exportWord").addEventListener("click", function() {
+  document.getElementById("exportWord").addEventListener("click", function() {
+  const filterKode = document.getElementById("filterKode").value.trim();
   const rows = document.querySelectorAll("#daftarSurat tbody tr");
 
   let header = `
@@ -550,20 +591,57 @@ document.getElementById("exportWord").addEventListener("click", function() {
       table { width:100%; border-collapse:collapse; }
       th, td { border:1px solid #000; padding:8px; text-align:left; line-height: 1.2; height: 1.2em; }
       th { background-color:#eee; }
+      tr.group-header {
+        background-color: #d9eaff;
+        font-weight: 600;
+      }
+    </style>
     </head><body>`;
 
   let footer = "</body></html>";
   let output = "";
+  let currentKode = "";
   let currentLembar = 1;
   let counter = 0;
+  let rowsExported = 0;
 
   for (let i = 0; i < rows.length; i++) {
+    // Skip group header rows in the table (they have class group-header)
+    if (rows[i].classList.contains("group-header")) {
+      continue;
+    }
+
+    const nomorSurat = rows[i].cells[1].textContent;
+    const kode = nomorSurat.split('/')[0]; // full code including anak persoalan
     const lembarRow = parseInt(rows[i].cells[4].textContent);
 
-    if (counter === 0 || counter === 9 || lembarRow !== currentLembar) {
+    // Only export rows matching the filterKode or if filterKode is empty export all
+    if (filterKode && kode !== filterKode) {
+      continue;
+    }
+
+    if (kode !== currentKode) {
       if (counter !== 0) {
         output += "</tbody></table><div style='page-break-before:always;'></div>";
       }
+      output += `<div class="Section1"><table><thead><tr>
+        <th colspan="4">Kode: ${kode}</th>
+      </tr></thead></table>`;
+
+      output += `<div class="Section1"><table><thead><tr>
+        <th>No</th>
+        <th>Nomor Surat</th>
+        <th>Judul Surat</th>
+        <th>Tanggal & Waktu Keluar</th>
+      </tr></thead><tbody>`;
+
+      currentKode = kode;
+      currentLembar = lembarRow;
+      counter = 0;
+    }
+
+    if (counter === 9 || lembarRow !== currentLembar) {
+      output += "</tbody></table><div style='page-break-before:always;'></div>";
       output += `<div class="Section1"><table><thead><tr>
         <th>No</th>
         <th>Nomor Surat</th>
@@ -582,18 +660,28 @@ document.getElementById("exportWord").addEventListener("click", function() {
     </tr>`;
 
     counter++;
+    rowsExported++;
   }
 
   output += "</tbody></table></div>";
+
+  if (rowsExported === 0) {
+    alert("Tidak ada data yang cocok dengan filter untuk diekspor.");
+    return;
+  }
+
   const sourceHTML = header + output + footer;
 
   const source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
   const fileDownload = document.createElement("a");
   document.body.appendChild(fileDownload);
+  fileDownload.style.display = 'none';
   fileDownload.href = source;
   fileDownload.download = 'Riwayat_Surat.doc';
   fileDownload.click();
-  document.body.removeChild(fileDownload);
+  setTimeout(() => {
+    document.body.removeChild(fileDownload);
+  }, 100);
 });
 
 document.getElementById("hapusSemua").addEventListener("click", function() {
@@ -620,12 +708,27 @@ window.addEventListener("load", function() {
   const labelKodeKU = document.getElementById("labelKodeKU");
   const kodePLSelect = document.getElementById("kodePL");
   const labelKodePL = document.getElementById("labelKodePL");
+  const filterKodeInput = document.getElementById("filterKode");
+
+  function updateStartNomorAndLembar(kodeFinal) {
+    if (nomorUrutPerGroup[kodeFinal]) {
+      form.startNomor.value = nomorUrutPerGroup[kodeFinal];
+    } else {
+      form.startNomor.value = 1;
+    }
+    if (jumlahSuratPerGroup[kodeFinal]) {
+      form.lembar.value = Math.ceil(jumlahSuratPerGroup[kodeFinal] / 9);
+    } else {
+      form.lembar.value = 1;
+    }
+  }
 
   function toggleKodeDetail() {
     if (kodeSelect.value === "KP") {
       kodeKPSelect.style.display = "block";
       labelKodeKP.style.display = "block";
       kodeKPSelect.required = true;
+      updateStartNomorAndLembar(kodeKPSelect.value || "KP.001");
     } else {
       kodeKPSelect.style.display = "none";
       labelKodeKP.style.display = "none";
@@ -637,6 +740,7 @@ window.addEventListener("load", function() {
       kodePRSelect.style.display = "block";
       labelKodePR.style.display = "block";
       kodePRSelect.required = true;
+      updateStartNomorAndLembar(kodePRSelect.value || "PR.001");
     } else {
       kodePRSelect.style.display = "none";
       labelKodePR.style.display = "none";
@@ -648,6 +752,7 @@ window.addEventListener("load", function() {
       kodeKUSelect.style.display = "block";
       labelKodeKU.style.display = "block";
       kodeKUSelect.required = true;
+      updateStartNomorAndLembar(kodeKUSelect.value || "KU.001");
     } else {
       kodeKUSelect.style.display = "none";
       labelKodeKU.style.display = "none";
@@ -658,16 +763,61 @@ window.addEventListener("load", function() {
       kodePLSelect.style.display = "block";
       labelKodePL.style.display = "block";
       kodePLSelect.required = true;
+      updateStartNomorAndLembar(kodePLSelect.value || "PL.001");
     } else {
       kodePLSelect.style.display = "none";
       labelKodePL.style.display = "none";
       kodePLSelect.required = false;
       kodePLSelect.value = "";
     }
+    if (!["KP", "PR", "KU", "PL"].includes(kodeSelect.value)) {
+      updateStartNomorAndLembar(kodeSelect.value);
+    }
   }
 
-  kodeSelect.addEventListener("change", toggleKodeDetail);
+  kodeSelect.addEventListener("change", () => {
+    toggleKodeDetail();
+    // Update filter input and reload list based on selected kode anak persoalan or kode utama
+    let kodeFinal = kodeSelect.value;
+    if (kodeFinal === "KP" && kodeKPSelect.value) {
+      kodeFinal = kodeKPSelect.value;
+    } else if (kodeFinal === "PR" && kodePRSelect.value) {
+      kodeFinal = kodePRSelect.value;
+    } else if (kodeFinal === "KU" && kodeKUSelect.value) {
+      kodeFinal = kodeKUSelect.value;
+    } else if (kodeFinal === "PL" && kodePLSelect.value) {
+      kodeFinal = kodePLSelect.value;
+    }
+    filterKodeInput.value = kodeFinal;
+    loadData(kodeFinal);
+  });
+  kodeKPSelect.addEventListener("change", () => {
+    updateStartNomorAndLembar(kodeKPSelect.value);
+    filterKodeInput.value = kodeKPSelect.value;
+    loadData(kodeKPSelect.value);
+  });
+  kodePRSelect.addEventListener("change", () => {
+    updateStartNomorAndLembar(kodePRSelect.value);
+    filterKodeInput.value = kodePRSelect.value;
+    loadData(kodePRSelect.value);
+  });
+  kodeKUSelect.addEventListener("change", () => {
+    updateStartNomorAndLembar(kodeKUSelect.value);
+    filterKodeInput.value = kodeKUSelect.value;
+    loadData(kodeKUSelect.value);
+  });
+  kodePLSelect.addEventListener("change", () => {
+    updateStartNomorAndLembar(kodePLSelect.value);
+    filterKodeInput.value = kodePLSelect.value;
+    loadData(kodePLSelect.value);
+  });
+
+  filterKodeInput.addEventListener("input", () => {
+    loadData(filterKodeInput.value.trim());
+  });
+
   toggleKodeDetail();
+
 });
 </script>
 
