@@ -1032,11 +1032,19 @@
     }
 
     // Event submit form surat
-    formSurat.addEventListener("submit", (e) => {
+      formSurat.addEventListener("submit", (e) => {
       e.preventDefault();
 
       const kode = formSurat.kode.value;
       const kodeKP = formSurat.kodeKP.value;
+      const kodePR = formSurat.kodePR.value;
+      const kodeKU = formSurat.kodeKU.value;
+      const kodePL = formSurat.kodePL.value;
+      const kodeHK = formSurat.kodeHK.value;
+      const kodeUM = formSurat.kodeUM.value;
+      const kodeIP = formSurat.kodeIP.value;
+      const kodeSM = formSurat.kodeSM.value;
+      const kodeAU = formSurat.kodeAU.value;
       const judul = formSurat.judul.value;
       const now = new Date();
 
@@ -1049,6 +1057,22 @@
       let kodeFinal = kode;
       if (kode === "KP" && kodeKP) {
         kodeFinal = kodeKP;
+      } else if (kode === "PR" && kodePR) {
+        kodeFinal = kodePR;
+      } else if (kode === "KU" && kodeKU) {
+        kodeFinal = kodeKU;
+      } else if (kode === "PL" && kodePL) {
+        kodeFinal = kodePL;
+      } else if (kode === "HK" && kodeHK) {
+        kodeFinal = kodeHK;
+      } else if (kode === "UM" && kodeUM) {
+        kodeFinal = kodeUM;
+      } else if (kode === "IP" && kodeIP) {
+        kodeFinal = kodeIP;
+      } else if (kode === "SM" && kodeSM) {
+        kodeFinal = kodeSM;
+      } else if (kode === "AU" && kodeAU) {
+        kodeFinal = kodeAU;
       }
 
       // Ambil settingan dari localStorage
@@ -1093,13 +1117,15 @@
       const rows = [];
       tbody.querySelectorAll("tr").forEach((tr) => {
         const cells = tr.querySelectorAll("td");
-        rows.push({
-          nomorUrut: cells[0].textContent,
-          nomorSurat: cells[1].textContent,
-          judul: cells[2].textContent,
-          waktuLengkap: cells[3].textContent,
-          lembar: cells[4].textContent,
-        });
+        if (cells.length === 5) {  // Pastikan baris memiliki 5 sel
+          rows.push({
+            nomorUrut: cells[0].textContent,
+            nomorSurat: cells[1].textContent,
+            judul: cells[2].textContent,
+            waktuLengkap: cells[3].textContent,
+            lembar: cells[4].textContent,
+          });
+        }
       });
       localStorage.setItem("daftarSurat", JSON.stringify(rows));
     }
