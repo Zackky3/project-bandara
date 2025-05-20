@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>NOMOR SURAT BANDARA TEUKU CUT ALI</title>
-  <link href="https://fo.nts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fo.nts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --primary-color: #4a90e2;
-      --primary-color-dark: #357ABD;
+      --primary-color-dark: #357abd;
       --secondary-color: #50e3c2;
       --background-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
       --text-color: #333;
@@ -16,7 +16,6 @@
       --box-shadow-light: 0 4px 15px rgba(74, 144, 226, 0.2);
       --box-shadow-hover: 0 6px 20px rgba(74, 144, 226, 0.35);
     }
-
     body {
       font-family: 'Poppins', Arial, sans-serif;
       padding: 40px 20px;
@@ -27,16 +26,15 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
     }
-
     h2 {
       color: var(--primary-color-dark);
       text-align: center;
       font-weight: 600;
       margin-bottom: 25px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     }
-
     form {
       background: white;
       padding: 30px 35px;
@@ -50,7 +48,6 @@
     form:hover {
       box-shadow: var(--box-shadow-hover);
     }
-
     label {
       display: block;
       margin-top: 15px;
@@ -58,8 +55,8 @@
       font-size: 0.95rem;
       color: var(--primary-color-dark);
     }
-
-    input, select {
+    input,
+    select {
       width: 100%;
       padding: 10px 12px;
       margin-top: 6px;
@@ -69,11 +66,11 @@
       transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
       outline-offset: 2px;
     }
-    input:focus, select:focus {
+    input:focus,
+    select:focus {
       border-color: var(--primary-color);
       box-shadow: 0 0 8px var(--primary-color);
     }
-
     button {
       margin-top: 25px;
       padding: 12px 0;
@@ -86,7 +83,8 @@
       font-weight: 600;
       font-size: 1.1rem;
       box-shadow: var(--box-shadow-light);
-      transition: background-color var(--transition-speed), box-shadow var(--transition-speed), transform var(--transition-speed);
+      transition: background-color var(--transition-speed), box-shadow var(--transition-speed),
+        transform var(--transition-speed);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -101,7 +99,6 @@
       transform: translateY(0);
       box-shadow: var(--box-shadow-light);
     }
-
     table {
       margin: 0 auto 40px auto;
       width: 100%;
@@ -139,8 +136,8 @@
       border: none;
       vertical-align: middle;
     }
-
-    #exportWord, #hapusSemua {
+    #exportWord,
+    #hapusSemua {
       display: block;
       margin: 0 auto 20px auto;
       padding: 12px 0;
@@ -151,11 +148,12 @@
       border-radius: var(--border-radius);
       cursor: pointer;
       box-shadow: var(--box-shadow-light);
-      transition: background-color var(--transition-speed), box-shadow var(--transition-speed), transform var(--transition-speed);
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 8px;
+      transition: background-color var(--transition-speed), box-shadow var(--transition-speed),
+        transform var(--transition-speed);
     }
     #exportWord {
       background-color: var(--secondary-color);
@@ -178,10 +176,10 @@
       box-shadow: 0 6px 20px rgba(231, 76, 60, 0.45);
       transform: translateY(-2px);
     }
-
     /* Responsive */
     @media (max-width: 600px) {
-      form, table {
+      form,
+      table {
         width: 100%;
         margin: 0 10px 30px 10px;
       }
@@ -208,618 +206,1010 @@
         color: var(--primary-color-dark);
       }
     }
+    /* Settingan menu styles */
+    #settinganMenu {
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow-light);
+      padding: 20px 25px 25px 25px;
+      width: 260px;
+      max-width: 90vw;
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      overflow: visible;
+    }
+    #settinganMenu.show {
+      display: flex;
+    }
+    #settinganMenu h3 {
+      margin: 0 0 20px 0;
+      color: var(--primary-color-dark);
+      font-weight: 600;
+      text-align: center;
+    }
+    #settinganMenu label {
+      margin-top: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--primary-color-dark);
+    }
+    #settinganMenu input {
+      margin-top: 6px;
+      padding: 8px 10px;
+      border: 1.5px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    #settinganMenu input:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 6px var(--primary-color);
+    }
+    #settinganToggle {
+      position: static;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      padding: 6px 12px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: var(--box-shadow-light);
+      transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+      z-index: 1100;
+    }
+    #settinganToggle:hover {
+      background-color: var(--primary-color-dark);
+      box-shadow: var(--box-shadow-hover);
+    }
+    #settinganToggle:active {
+      transform: translateY(1px);
+    }
   </style>
 </head>
-<body>
-
-  <h2>NOMOR SURAT BANDARA TEUKU CUT ALI</h2>
-  <form id="formSurat">
-    <label for="startNomor">Nomor Surat:</label>
-    <input type="number" id="startNomor" name="startNomor" value="1" required>
-
-    <label for="kode">Kode Klasifikasi:</label>
-    <select id="kode" name="kode" required>
-      <option value="KP">KP (Kepegawaian)</option>
-      <option value="PR">PR (Perencanaan)</option>
-      <option value="KU">KU (Keuangan)</option>
-      <option value="PL">PL (Perlengkapan)</option>
-      <option value="PM">PM (Penanaman Modal)</option>
-      <option value="HK">HK (Hukum)</option>
-      <option value="UM">UM (Umum)</option>
-      <option value="IP">IP (Informasi Publik)</option>
-      <option value="HL">HL (Hubungan Antar Lembaga)</option>
-      <option value="KL">KL (Kerjasama dan Fasilitas Kemitraan/Investasi dan Hubungan Luar Negeri)</option>
-      <option value="PS">PS (Pengawasan)</option>
-      <option value="SM">SM (Pengembangan SDM)</option>
-      <option value="LT">LT (Penelitian dan Pengembangan)</option>
-      <option value="PT">PT (Pengelolaann Transportasi Berkelanjutan)</option>
-      <option value="TI">TI (Teknologi Informasi dan Komunikasi)</option>
-      <option value="AJ">AJ (Angkutan Jalan)</option>
-      <option value="TJ">TJ (Transportasi Jabodetabek)</option>
-      <option value="AP">AP (Angkutan Sungai Danau dan Penyebrangan)</option>
-      <option value="AL">AL (Angkutan Laut)</option>
-      <option value="AU">HK (Angkutan Udara)</option>
-      <option value="KA">KA (Kereta Api)</option>
-      <option value="MP">MP (Mahkamah Pelayaran)</option>
-      <option value="IK">KA (Investigasi Kecelakaan)</option>
-    </select>
-
-    <label for="kodeKP" id="labelKodeKP" style="display:none; margin-top: 15px;">Kode Anak Persoalan:</label>
-    <select id="kodeKP" name="kodeKP" style="display:none;">
-      <optgroup label="Kepegawaian">  
-      <option value="KP.001">KP.001 (Data Kepegawaian)</option>
-      <option value="KP.002">KP.002 (Identitas Pegawai)</option>
-      <option value="KP.003">KP.003 (Daftar Nominatif)</option>
-      <option value="KP.004">KP.004 (Penugasan dan Perintah)</option>
-      <option value="KP.005">KP.005 (Penghargaan)</option>
-      <option value="KP.006">KP.006 (Pendelegasian Wewenang)</option>
-      <option value="KP.007">KP.007 (Sumpah Pegawai / Penghentian Pegawai)</option>
-      <option value="KP.008">KP.008 (Spesimen Tanda Tangan / Paraf)</option>
-      <option value="KP.009">KP.009 (Daftar Kepangkatan)</option>
-      <option value="KP.010">KP.010 (Laporan Harta Kekayaan)</option>
-      <option value="KP.011">KP.011 (Cuti)</option>
-      <option value="KP.012">KP.012 (Pernikahan)</option>
-      <option value="KP.013">KP.013 (Absensi)</option>
-      <option value="KP.014">KP.014 (Izin Pegawai)</option>
-
-      <optgroup label="1. Rencana Kepegawaian">
-        <option value="KP.101">KP.101 (Formasi Pegawai)</option>
-        <option value="KP.102">KP.102 (Analisi Jabatan)</option>
-        <option value="KP.103">KP.103 (Penerimaan Pegawai)</option>
-        <option value="KP.104">KP.104 (Pengangkatan Pegawai)</option>
-        <option value="KP.105">KP.105 (Pengangkatan Jabatan)</option>
-        <option value="KP.106">KP.106 (Penempatan)</option>
-        <option value="KP.107">KP.107 (Pengendalian Pengangkatan)</option>
-        <option value="KP.108">KP.108 (Dispensasi Jabatan)</option>
-        <option value="KP.109">KP.109 (Pendayagunaan/Pembinaan Sumber Daya Manusia)</option>
-        <option value="KP.110">KP.110 (Tenaga Kerja Dibidang Perhubungan)</option>
-        <option value="KP.111">KP.111 (Penilaian)</option>
-        <option value="KP.112">KP.112 (Evaluasi)</option>
-        <option value="KP.113">KP.113 (Pembibitaan SDM)</option>
-        <option value="KP.114">KP.114 (Magang)</option>
-      </optgroup>
-
-      <optgroup label="2. Penggajian Pegawai">
-        <option value="KP.201">KP.201 (Penggajian)</option>
-        <option value="KP.202">KP.202 (Pendaftaran Keluarga)</option>
-        <option value="KP.203">KP.203 (Uang Makan)</option>
-      </optgroup>
-
-      <optgroup label="3. Tata Mutasi">
-        <option value="KP.301">KP.301 (Baperjakat)</option>
-        <option value="KP.302">KP.302 (Kenaikan Pangkat/Kenaikan Jabatan)</option>
-        <option value="KP.303">KP.303 (Mutasi Jabatan)</option>
-        <option value="KP.304">KP.304 (Peta Pemangku Jabatan)</option>
-        <option value="KP.305">KP.305 (Mutasi)</option>
-        <option value="KP.306">KP.306 (Masa Kerja)</option>
-        <option value="KP.307">KP.307 (Pembantuan)</option>
-        <option value="KP.308">KP.308 (Inpassing)</option>
-        <option value="KP.309">KP.309 (Pemanggilan Pejabat)</option>
-        <option value="KP.310">KP.310 (Serah Terima Jabatan)</option>
-        <option value="KP.311">KP.311 (Assesment Pegawai)</option>
-      </optgroup>
-
-      <optgroup label="4. Penilaian">
-        <option value="KP.401">KP.401 (Ujian Dinas)</option>
-        <option value="KP.402">KP.402 (Sanksi Kepegawaian)</option>
-        <option value="KP.403">KP.403 (Hukuman)</option>
-        <option value="KP.404">KP.404 (Rehabilitas)</option>
-        <option value="KP.405">KP.405 (Disiplin Pegawai)</option>
-        <option value="KP.406">KP.406 (Kinerja Pegawai)</option>
-        <option value="KP.407">KP.407 (Angka Kredit Jabatan Fungsional)</option>
-      </optgroup>
-
-      <optgroup label="5. Kesejahteraan Pegawai">
-        <option value="KP.501">KP.501 (Kesehatan)</option>
-        <option value="KP.502">KP.502 (Asuransi)</option>
-        <option value="KP.503">KP.503 (Bantuan Pegawai)</option>
-        <option value="KP.504">KP.504 (Olah Raga)</option>
-        <option value="KP.505">KP.505 (Pembinaan Mental)</option>
-        <option value="KP.506">KP.506 (Orang Tua Asuh)</option>
-        <option value="KP.507">KP.507 (Psikologi)</option>
-        <option value="KP.508">KP.508 (Psikogram)</option>
-        <option value="KP.509">KP.509 (Pembekalan Pensiun)</option>
-      </optgroup>
-
-      <optgroup label="6. Pemberhentian">
-        <option value="KP.601">KP.601 (Pemberhentian Dengan Hormat)</option>
-        <option value="KP.602">KP.602 (Pemberhentiang Deangan Tidak Hormat)</option>
-        <option value="KP.603">KP.603 (Masa Periapan Pensiun (MPP))</option>
-        <option value="KP.604">KP.604 (Uang Tunggu Pensiun)</option>
-      </optgroup>
-
-      <optgroup label="7. Pensiun">
-        <option value="KP.701">KP.701 (Batas Usia Pensiun (BUP))</option>
-        <option value="KP.702">KP.702 (Pensiun Janda/Duda/Anak)</option>
-        <option value="KP.703">KP.703 (Pensiun Meninggal Dunia/tewas)</option>
-        <option value="KP.704">KP.704 (Pensiun Keuzunan)</option>
-        <option value="KP.705">KP.705 (Pensiun Atas Permintaan Sendiri)</option>
-      </optgroup>
-
-      <optgroup label="8. Perkumpulan Pegawai">
-        <option value="KP.801">KP.801 (Perkumpulan)</option>
-        <option value="KP.802">KP.802 (Kewanitaan/Dharmawanita)</option>
-        <option value="KP.803">KP.803 (Koperasi,  Kantin, Wisma Peristirahatan)</option>
-      </optgroup>
-
-      <optgroup label="9. Organisasi dan Tata Laksana">
-        <option value="KP.901">KP.901 (Organisasi)</option>
-        <option value="KP.902">KP.902 (Tata Laksana)</option>
-        <option value="KP.903">KP.903 (Pembakuan Sarana Kerja)</option>
-        <option value="KP.904">KP.904 (Reformasi Birokrasi)</option>
-        <option value="KP.905">KP.905 (Peta Jabatan)</option>
-      </optgroup>
-    </select>
-
-    <label for="kodePR" id="labelKodePR" style="display:none; margin-top: 15px;">Kode Anak Persoalan:</label>
-    <select id="kodePR" name="kodePR" style="display:none;">
-      <optgroup label="Perencanaan">
-        <option value="PR.001">PR.001 (Rencana Strategis)</option>
-        <option value="PR.002">PR.002 (Rencana Operasional)</option>
-        <option value="PR.003">PR.003 (Evaluasi Rencana)</option>
-        <option value="PR.004">PR.004 (Pengembangan Program)</option>
-        <option value="PR.005">PR.005 (Analisis Kebutuhan)</option>
-      </optgroup>
-    </select>
-
-    <label for="kodeKU" id="labelKodeKU" style="display:none; margin-top: 15px;">Kode Anak Persoalan:</label>
-    <select id="kodeKU" name="kodeKU" style="display:none;">
-      <optgroup label="Keuangan">
-        <option value="KU.001">KU.001 (Anggaran)</option>
-        <option value="KU.002">KU.002 (Pengeluaran)</option>
-        <option value="KU.003">KU.003 (Penerimaan)</option>
-        <option value="KU.004">KU.004 (Laporan Keuangan)</option>
-        <option value="KU.005">KU.005 (Audit)</option>
-      </optgroup>
-    </select>
-
-    <label for="kodePL" id="labelKodePL" style="display:none; margin-top: 15px;">Kode Anak Persoalan:</label>
-    <select id="kodePL" name="kodePL" style="display:none;">
+  <body>
+    <div id="topBar" style="position: fixed; top: 0; right: 0; padding: 10px 20px; z-index: 1100; background: var(--background-gradient); border-bottom-left-radius: var(--border-radius);">
+      <button id="settinganToggle" title="Buka Settingan" aria-label="Buka Settingan" style="font-size: 1.5rem; padding: 6px 10px; line-height: 1; background: var(--primary-color); color: white; border: none; border-radius: var(--border-radius); cursor: pointer; box-shadow: var(--box-shadow-light); display: flex; align-items: center; justify-content: center;">
+        ⚙️
+      </button>
+    </div>
+    <div id="settinganMenu" aria-label="Menu Settingan">
+      <h3>Settingan Nomor Surat</h3>
+      <form id="formSettingan">
+        <label for="settingStartNomor">Nomor Surat:</label>
+        <input type="number" id="settingStartNomor" name="settingStartNomor" min="1" required />
+        <label for="settingLembar">Lembar Surat:</label>
+        <input type="number" id="settingLembar" name="settingLembar" min="1" required />
+        <label for="settingUnit">Unit Pengirim:</label>
+        <input type="text" id="settingUnit" name="settingUnit" required />
+        <button type="submit">Simpan Settingan</button>
+      </form>
+    </div>
+    <h2 style="position: sticky; top: 0; background: var(--background-gradient); padding: 10px 0; z-index: 100;">
+      NOMOR SURAT BANDARA TEUKU CUT ALI
+    </h2>
+    <div id="containerFormTable" style="display: flex; gap: 40px; align-items: flex-start; max-width: 1200px; width: 100%;">
+      <form id="formSurat" style="flex: 1; min-width: 320px;">
+      <label for="kode">Kode Klasifikasi:</label>
+      <select id="kode" name="kode" required>
+        <option value="KP">KP (Kepegawaian)</option>
+        <option value="PR">PR (Perencanaan)</option>
+        <option value="KU">KU (Keuangan)</option>
+        <option value="PL">PL (Perlengkapan)</option>
+        <option value="PM">PM (Penanaman Modal)</option>
+        <option value="HK">HK (Hukum)</option>
+        <option value="UM">UM (Umum)</option>
+        <option value="IP">IP (Informasi Publik)</option>
+        <option value="SM">SM (Pengembangan SDM)</option>
+        <option value="AU">AU (Angkutan Udara)</option>
+      
+      </select>
+      <label for="kodeKP" id="labelKodeKP" style="display:none; margin-top: 15px;">Kode Anak Persoalan:</label>
+      <select id="kodeKP" name="kodeKP" style="display:none;">
+        <optgroup label="Kepegawaian">
+          <option value="KP.001">KP.001 (Data Kepegawaian)</option>
+          <option value="KP.002">KP.002 (Identitas Pegawai)</option>
+          <option value="KP.003">KP.003 (Daftar Nominatif)</option>
+          <option value="KP.004">KP.004 (Penugasan dan Perintah)</option>
+          <option value="KP.005">KP.005 (Penghargaan)</option>
+          <option value="KP.006">KP.006 (Pendelegasian Wewenang)</option>
+          <option value="KP.007">KP.007 (Sumpah Pegawai / Penghentian Pegawai)</option>
+          <option value="KP.008">KP.008 (Spesimen Tanda Tangan / Paraf)</option>
+          <option value="KP.009">KP.009 (Daftar Kepangkatan)</option>
+          <option value="KP.010">KP.010 (Laporan Harta Kekayaan)</option>
+          <option value="KP.011">KP.011 (Cuti)</option>
+          <option value="KP.012">KP.012 (Pernikahan)</option>
+          <option value="KP.013">KP.013 (Absensi)</option>
+          <option value="KP.014">KP.014 (Izin Pegawai)</option>
+          <optgroup label="1. Rencana Kepegawaian">
+            <option value="KP.101">KP.101 (Formasi Pegawai)</option>
+            <option value="KP.102">KP.102 (Analisi Jabatan)</option>
+            <option value="KP.103">KP.103 (Penerimaan Pegawai)</option>
+            <option value="KP.104">KP.104 (Pengangkatan Pegawai)</option>
+            <option value="KP.105">KP.105 (Pengangkatan Jabatan)</option>
+            <option value="KP.106">KP.106 (Penempatan)</option>
+            <option value="KP.107">KP.107 (Pengendalian Pengangkatan)</option>
+            <option value="KP.108">KP.108 (Dispensasi Jabatan)</option>
+            <option value="KP.109">KP.109 (Pendayagunaan/Pembinaan Sumber Daya Manusia)</option>
+            <option value="KP.110">KP.110 (Tenaga Kerja Dibidang Perhubungan)</option>
+            <option value="KP.111">KP.111 (Penilaian)</option>
+            <option value="KP.112">KP.112 (Evaluasi)</option>
+            <option value="KP.113">KP.113 (Pembibitaan SDM)</option>
+            <option value="KP.114">KP.114 (Magang)</option>
+          </optgroup>
+          <optgroup label="2. Penggajian Pegawai">
+            <option value="KP.201">KP.201 (Penggajian)</option>
+            <option value="KP.202">KP.202 (Pendaftaran Keluarga)</option>
+            <option value="KP.203">KP.203 (Uang Makan)</option>
+          </optgroup>
+          <optgroup label="3. Tata Mutasi">
+            <option value="KP.301">KP.301 (Baperjakat)</option>
+            <option value="KP.302">KP.302 (Kenaikan Pangkat/Kenaikan Jabatan)</option>
+            <option value="KP.303">KP.303 (Mutasi Jabatan)</option>
+            <option value="KP.304">KP.304 (Peta Pemangku Jabatan)</option>
+            <option value="KP.305">KP.305 (Mutasi)</option>
+            <option value="KP.306">KP.306 (Masa Kerja)</option>
+            <option value="KP.307">KP.307 (Pembantuan)</option>
+            <option value="KP.308">KP.308 (Inpassing)</option>
+            <option value="KP.309">KP.309 (Pemanggilan Pejabat)</option>
+            <option value="KP.310">KP.310 (Serah Terima Jabatan)</option>
+            <option value="KP.311">KP.311 (Assesment Pegawai)</option>
+          </optgroup>
+          <optgroup label="4. Penilaian">
+            <option value="KP.401">KP.401 (Ujian Dinas)</option>
+            <option value="KP.402">KP.402 (Sanksi Kepegawaian)</option>
+            <option value="KP.403">KP.403 (Hukuman)</option>
+            <option value="KP.404">KP.404 (Rehabilitas)</option>
+            <option value="KP.405">KP.405 (Disiplin Pegawai)</option>
+            <option value="KP.406">KP.406 (Kinerja Pegawai)</option>
+            <option value="KP.407">KP.407 (Angka Kredit Jabatan Fungsional)</option>
+          </optgroup>
+          <optgroup label="5. Kesejahteraan Pegawai">
+            <option value="KP.501">KP.501 (Kesehatan)</option>
+            <option value="KP.502">KP.502 (Asuransi)</option>
+            <option value="KP.503">KP.503 (Bantuan Pegawai)</option>
+            <option value="KP.504">KP.504 (Olah Raga)</option>
+            <option value="KP.505">KP.505 (Pembinaan Mental)</option>
+            <option value="KP.506">KP.506 (Orang Tua Asuh)</option>
+            <option value="KP.507">KP.507 (Psikologi)</option>
+            <option value="KP.508">KP.508 (Psikogram)</option>
+            <option value="KP.509">KP.509 (Pembekalan Pensiun)</option>
+          </optgroup>
+          <optgroup label="6. Pemberhentian">
+            <option value="KP.601">KP.601 (Pemberhentian Dengan Hormat)</option>
+            <option value="KP.602">KP.602 (Pemberhentiang Deangan Tidak Hormat)</option>
+            <option value="KP.603">KP.603 (Masa Periapan Pensiun (MPP))</option>
+            <option value="KP.604">KP.604 (Uang Tunggu Pensiun)</option>
+          </optgroup>
+          <optgroup label="7. Pensiun">
+            <option value="KP.701">KP.701 (Batas Usia Pensiun (BUP))</option>
+            <option value="KP.702">KP.702 (Pensiun Janda/Duda/Anak)</option>
+            <option value="KP.703">KP.703 (Pensiun Meninggal Dunia/tewas)</option>
+            <option value="KP.704">KP.704 (Pensiun Keuzunan)</option>
+            <option value="KP.705">KP.705 (Pensiun Atas Permintaan Sendiri)</option>
+          </optgroup>
+          <optgroup label="8. Perkumpulan Pegawai">
+            <option value="KP.801">KP.801 (Perkumpulan)</option>
+            <option value="KP.802">KP.802 (Kewanitaan/Dharmawanita)</option>
+            <option value="KP.803">KP.803 (Koperasi,  Kantin, Wisma Peristirahatan)</option>
+          </optgroup>
+          <optgroup label="9. Organisasi dan Tata Laksana">
+            <option value="KP.901">KP.901 (Organisasi)</option>
+            <option value="KP.902">KP.902 (Tata Laksana)</option>
+            <option value="KP.903">KP.903 (Pembakuan Sarana Kerja)</option>
+            <option value="KP.904">KP.904 (Reformasi Birokrasi)</option>
+            <option value="KP.905">KP.905 (Peta Jabatan)</option>
+          </optgroup>
+        </optgroup>
+      </select>
+      <label for="kodePR" id="labelKodePR" style="display:none; margin-top: 15px;">Kode Klasifikasi PR Detail:</label>
+      <select id="kodePR" name="kodePR" style="display:none;">
+        <optgroup label="Perencanaan">
+          <option value="PR.001">PR.001 (Kementrian)</option>
+          <option value="PR.002">PR.002 (Transportasi Darat)</option>
+          <option value="PR.003">PR.003 (Transportasi Laut)</option>
+          <option value="PR.004">PR.004 (Transportasi Udara)</option>
+          <option value="PR.005">PR.005 (Transportasi Perkeretaapian)</option>
+          <option value="PR.006">PR.006 (Transportasi Multimoda)</option>
+          <option value="PR.007">PR.007 (Rencana Induk Transportasi Jabodetabek (RITJ))</option>
+          <option value="PR.008">PR.008 (Penunjang)</option>
+        </optgroup>
+        <optgroup label="1. Pemantauan dan Pengendalian">
+          <option value="PR.101">PR.101 (Kementrian)</option>
+          <option value="PR.102">PR.102 (Transportasi Darat)</option>
+          <option value="PR.103">PR.103 (Transportasi Laut)</option>
+          <option value="PR.104">PR.104 (Transportasi Udara)</option>
+          <option value="PR.105">PR.105 (Transportasi Perkeretaapian)</option>
+          <option value="PR.106">PR.106 (Transportasi Multimoda)</option>
+          <option value="PR.107">PR.107 (Penunjang)</option>
+        </optgroup>
+        <optgroup label="2. Analisis, Evaluasi, Penilaian dan Pelaporan Perencanaan Program Kerja">
+          <option value="PR.201">PR.201 (Kementrian)</option>
+          <option value="PR.202">PR.202 (Transportasi Darat)</option>
+          <option value="PR.203">PR.203 (Transportasi Laut)</option>
+          <option value="PR.204">PR.204 (Transportasi Udara)</option>
+          <option value="PR.205">PR.205 (Transportasi Perkeretaapian)</option>
+          <option value="PR.206">PR.206 (Transportasi Multimoda)</option>
+          <option value="PR.207">PR.207 (Penunjang)</option>
+        </optgroup>
+        <optgroup label="3. Tarif">
+          <option value="PR.301">PR.301 (Transportasi Darat)</option>
+          <option value="PR.302">PR.302 (Transportasi Laut)</option>
+          <option value="PR.303">PR.303 (Transportasi Udara)</option>
+          <option value="PR.304">PR.304 (Transportasi Perkeretaapian)</option>
+          <option value="PR.305">PR.305 (Transportasi Multimoda)</option>
+          <option value="PR.306">PR.306 (Penunjang)</option>
+        </optgroup>
+      </select>
+      <label for="kodeKU" id="labelKodeKU" style="display:none; margin-top: 15px;">Kode Klasifikasi KU Detail:</label>
+      <select id="kodeKU" name="kodeKU" style="display:none;">
+        <optgroup label="Keuangan">
+          <option value="KU.001">KU.001 (Perencanaan Anggaran)</option>
+          <option value="KU.002">KU.002 (Daftar Isian Pelaksanaan Anggaran(DIPA))</option>
+          <option value="KU.003">KU.003 (Anggaran penerimaan dan Belanja Negara Perubahan(APBN-P))</option>
+        </optgroup>
+        <optgroup label="1. Realisi Pendapatan">
+          <option value="KU.101">KU.101 (Pajak)</option>
+          <option value="KU.102">KU.102 (Penerimaan Negara Bukan Pajak(PNBP))</option>
+          <option value="KU.103">KU.103 (Badan Layanan Umum(BLU))</option>
+          <option value="KU.104">KU.104 (Sisa Anggaran Lebih)</option>
+          <option value="KU.105">KU.105 (Investasi)</option>
+        </optgroup>
+        <optgroup label="2. Belanja">
+          <option value="KU.201">KU.201 (Pembayaran Keuangan)</option>
+          <option value="KU.202">KU.202 (Dokumen Tata Usaha Anggaran)</option>
+          <option value="KU.203">KU.203 (Pembayaran Gaji)</option>
+          <option value="KU.204">KU.204 (Laporan Keuanggan)</option>
+          <option value="KU.205">KU.205 (Neraca)</option>
+          <option value="KU.206">KU.206 (Laporan Arus Kas)</option>
+          <option value="KU.207">KU.207 (Akuntansi Keuanggan)</option>
+        </optgroup>
+        <optgroup label="3. Pinjaman Luar Negeri">
+          <option value="KU.301">KU.301 (Proyek)</option>
+          <option value="KU.302">KU.302 (Kesanggupan Negara Donor(Green Book))</option>
+          <option value="KU.303">KU.303 (Memorandum of Understanding(MoU))</option>
+          <option value="KU.304">KU.304 (Loan Agreemen)</option>
+          <option value="KU.305">KU.305 (Laporan Hutang Negara)</option>
+        </optgroup>
+        <optgroup label="4. Pengelola Anggaran">
+          <option value="KU.401">KU.401 (Kuasa Pengguna Anggaran)</option>
+          <option value="KU.402">KU.402 (Kuasa Pengguna Barang/Jasa)</option>
+          <option value="KU.403">KU.403 (Pejabat Pembuat Komitmen)</option>
+          <option value="KU.404">KU.404 (Pejabat Pembuat Daftar Gaji)</option>
+          <option value="KU.405">KU.405 (Pejabat Penandatanganan SPM)</option>
+          <option value="KU.406">KU.406 (Bendahara Penerimaan/Pengeluaran)</option>
+          <option value="KU.407">KU.407 (Pengelola Barang)</option>
+        </optgroup>
+        <optgroup label="5. Pertangguangjawaban Keuangan">
+          <option value="KU.501">KU.501 (Laporan Hasil Pemeriksaan Badan Pemeriksa Keuangan(BPK))</option>
+          <option value="KU.502">KU.502 (Pengawasan dan Pemeriksaan Internal)</option>
+          <option value="KU.503">KU.503 (Tindak lanjut/Tanggapan Laporan Hasil Pemeriksaan)</option>
+          <option value="KU.504">KU.504 (Tuntutan Perbendaharaan)</option>
+        </optgroup>
+      </select>
+      <label for="kodePL" id="labelKodePL" style="display:none; margin-top: 15px;">Kode Klasifikasi PL Detail:</label>
+      <select id="kodePL" name="kodePL" style="display:none;">
+        <optgroup label="Perlengkapan">
+          <option value="PL.001">PL.001 (Analisis Data)</option>
+          <option value="PL.002">PL.002 (Klasifikasi Data)</option>
+          <option value="PL.003">PL.003 (Rencaja Kebutuhan)</option>
+          <option value="PL.004">PL.004 (Pendaftaran Akun Operator BMN)</option>
+        </optgroup>
+        <optgroup label="1. Pengadaan">
+          <option value="PL.101">PL.101 (Penyedia/Rekanan)</option>
+          <option value="PL.102">PL.102 (Penawaran)</option>
+          <option value="PL.103">PL.103 (Tender)</option>
+          <option value="PL.104">PL.104 (Pengumuman Lelang)</option>
+          <option value="PL.105">PL.105 (Sanggahan)</option>
+          <option value="PL.106">PL.106 (Surat Kuasa)</option>
+          <option value="PL.107">PL.107 (Kontrak)</option>
+          <option value="PL.108">PL.108 (Berita Acara Serah Terima Hasil Pekerjaan)</option>
+          <option value="PL.109">PL.109 (Pembayaran/Invoice)</option>
+          <option value="PL.110">PL.110 (Pembelian)</option>
+          <option value="PL.111">PL.111 (Barang Jasa)</option>
+        </optgroup>
+        <optgroup label="2. Pengelolaan">
+          <option value="PL.201">PL.201 (Pembinaan)</option>
+          <option value="PL.202">PL.202 (Pengawasan)</option>
+          <option value="PL.203">PL.203 (Distribusi)</option>
+          <option value="PL.204">PL.204 (Pemeliharaan)</option>
+          <option value="PL.205">PL.205 (Rehabilitas)</option>
+          <option value="PL.206">PL.206 (Pergudangan)</option>
+        </optgroup>
+        <optgroup label="3. Inventarisasi">
+          <option value="PL.301">PL.301 (Inventarisasi Umum)</option>
+          <option value="PL.302">PL.302 (Barang-Barang bergerak)</option>
+          <option value="PL.303">PL.303 (Barang-Barang tidak bergerak)</option>
+          <option value="PL.304">PL.304 (Standarisasi)</option>>
+        </optgroup>
+        <optgroup label="4. Penghapusan">
+          <option value="PL.101">PL.101 (Standarisasi)</option>
+          <option value="PL.102">PL.102 (Usul Penghapusan)</option>
+          <option value="PL.103">PL.103 (Penilaian)</option>
+          <option value="PL.104">PL.104 (Penetapan Penghapusan)</option>
+          <option value="PL.105">PL.105 (Pelelangan)</option>
+          <option value="PL.106">PL.106 (Tukar Guling)</option>
+        </optgroup>
+      </select>
+      <label for="kodeHK" id="labelKodeHK" style="display:none; margin-top: 15px;">Kode Klasifikasi HK Detail:</label>
+      <select id="kodeHK" name="kodeHK" style="display:none;">
+        <optgroup label="Hukum">
+          <option value="HK.001">HK.001 (Undung-Undang Negara)</option>
+          <option value="HK.002">HK.002 (Ketetapan MPR)</option>
+          <option value="HK.003">HK.003 (Undung-Undang)</option>
+          <option value="HK.004">HK.004 (Peraturan Pemerintah Pengganti Undung-Undang (PERPU))</option>
+          <option value="HK.005">HK.005 (Peraturan Pemerintah)</option>
+          <option value="HK.006">HK.006 (Peraturan Presiden)</option>
+          <option value="HK.007">HK.007 (Keputusan Presiden)</option>
+          <option value="HK.008">HK.008 (Instruksi Presiden)</option>
+        </optgroup>
+        <optgroup label="1. Produk Kementrian/Lembaga di luar Kementrian Perhubungan">
+          <option value="HK.001">HK.001 (Peraturan Menteri/Pimpinan Lembaga)</option>
+          <option value="HK.002">HK.002 (Keputusan Menteri/Pimpinan Lembaga)</option>
+          <option value="HK.003">HK.003 (Instruksi Menteri)</option>
+          <option value="HK.004">HK.004 (Keputusan Pimpinan Eselon I)</option>
+          <option value="HK.005">HK.005 (Keputusan/Peraturan Gubernur, PERDA)</option>
+          <option value="HK.006">HK.006 (Putusan Komisi Informasi Publik)</option>
+        </optgroup>
+        <optgroup label="2. Produk Kementrian Perhubungan">
+          <option value="HK.201">HK.201 (Kesepakatan Bersama (MoU)/Perjanjian)</option>
+          <option value="HK.202">HK.202 (Peraturan Menteri)</option>
+          <option value="HK.203">HK.203 (Keputusan Menteri)</option>
+          <option value="HK.204">HK.204 (Instruksi Menteri)</option>
+          <option value="HK.205">HK.205 (Peraturan Direktur/Kepala Badan)</option>
+          <option value="HK.206">HK.206 (Peraturan/Keputusan KPA Eselon II)</option>
+          <option value="HK.207">HK.207 (Keputusan Sekretaris Jendral)</option> 
+          <option value="HK.208">HK.208 (Keputusan Inspektur Jendral)</option>
+          <option value="HK.209">HK.209 (Keputusan Direktur Jendeeral)</option>
+          <option value="HK.210">HK.210 (Keputusan Kepala Badan)</option>
+          <option value="HK.211">HK.211 (Instruksi/Pimpinan Eselon I)</option>
+          <option value="HK.212">HK.212 (Putusan Mahkamah Pelayanan)</option>
+        </optgroup>
+        <optgroup label="3. Perdata">
+          <option value="HK.301">HK.301 (Tentang Orang)</option>
+          <option value="HK.302">HK.302 (Tentang Kebendaan)</option>
+          <option value="HK.303">HK.303 (Tentang Perikanan)</option>
+          <option value="HK.304">HK.304 (Tentang Pembuktian dan Kadaluwarsa)</option>
+          <option value="HK.305">HK.305 (Tentang Peringatan)</option>
+        </optgroup>
+        <optgroup label="4. Pidana">
+          <option value="HK.401">HK.401 (Tentang Orang)</option>
+          <option value="HK.402">HK.402 (Kejahatan)</option>
+          <option value="HK.403">HK.403 (Pelanggaran)</option>
+          <option value="HK.404">HK.404 (Korupsi Kolusi dan Nepotisme (KKN))</option>
+        </optgroup>
+        <optgroup label="5. Pengadilan Tata Usaha Negara (PTUN)">
+          <option value="HK.501">HK.501 (Gugatan)</option>
+          <option value="HK.502">HK.502 (Putusan)</option>
+        </optgroup>
+        <optgroup label="6. Judicial Review">
+          <option value="HK.601">HK.601 (Uji Materiil di Mahkamah Konstitusi)</option>
+          <option value="HK.602">HK.602 (Uji Mateiil Mahkamah Agung)</option>
+        </optgroup>
+        <optgroup label="7. Perizinan">
+          <option value="HK.701">HK.701 (Pemberian Izin)</option>
+          <option value="HK.702">HK.702 (Penolakan)</option>
+          <option value="HK.703">HK.703 (Peringatan)</option>
+          <option value="HK.704">HK.704 (Pencabutan)</option>
+          <option value="HK.705">HK.705 (Perpanjangan Izin)</option>
+          <option value="HK.706">HK.706 (Despensasi)</option>
+        </optgroup>
+      </select>
+      <label for="kodeUM" id="labelKodeUM" style="display:none; margin-top: 15px;">Kode Klasifikasi UM Detail:</label>
+      <select id="kodeUM" name="kodeUM" style="display:none;">
+        <optgroup label="Umum">
+          <option value="UM.001">UM.001 (Kearsipan)</option>
+          <option value="UM.002">UM.002 (Tata Naskah Dinas)</option>
+          <option value="UM.003">UM.003 (Alamat)</option>
+          <option value="UM.004">UM.004 (Risalah Rapat)</option>
+          <option value="UM.005">UM.005 (Laporan Menteri)</option>
+          <option value="UM.006">UM.006 (Laporan dan Informasi)</option>
+          <option value="UM.007">UM.007 (Pelayanan Prima)</option>
+          <option value="UM.008">UM.008 (Surat Kuasa)</option>
+        </optgroup>
+        <optgroup label="1. Kerumahtanggaan">
+          <option value="UM.101">UM.101 (Ketertiban dan Keamanan)</option>
+          <option value="UM.102">UM.102 (Izin Peminjaman)</option>
+          <option value="UM.103">UM.103 (Perumahan Dinas/Kendaraan Dinas)</option>
+          <option value="UM.104">UM.104 (Cleaning Service/Kebersihan)</option>
+          <option value="UM.105">UM.105 (Gedung/Perkantoran)</option>
+          <option value="UM.106">UM.106 (Pakaian Dinas/Tanda Pengenal)</option>
+          <option value="UM.107">UM.107 (Jaringan Pengunjung)</option>
+        </optgroup>
+        <optgroup label="2. Keprotokolan">
+          <option value="UM.201">UM.201 (Audiensi)</option>
+          <option value="UM.202">UM.202 (Kunjungan)</option>
+          <option value="UM.203">UM.203 (Pelantikan)</option>
+          <option value="UM.204">UM.204 (Upacara)</option>
+          <option value="UM.205">UM.205 (Inspektur Upacara (IRUP))</option>
+          <option value="UM.206">UM.206 (Peresmian)</option>
+          <option value="UM.207">UM.207 (Rapat-rapat)</option>
+          <option value="UM.208">UM.208 (Ucapan)</option>
+          <option value="UM.209">UM.209 (Saran)</option>
+          <option value="UM.010">UM.010 (Workshop)</option>
+        </optgroup>
+        <optgroup label="3. Bantuan Dinas">
+          <option value="UM.301">UM.301 (Bencana Alam/Musibah)</option>
+          <option value="UM.302">UM.302 (Angkutan)</option>
+          <option value="UM.303">UM.303 (Sumbangan)</option>
+        </optgroup>
+      </select>
+       <label for="kodeIP" id="labelKodeIP" style="display:none; margin-top: 15px;">Kode Klasifikasi IP Detail:</label>
+    <select id="kodeIP" name="kodeIP" style="display:none;">
       <optgroup label="Perlengkapan">
-        <option value="PL.001">PL.001 (Anggaran)</option>
-        <option value="PL.002">PL.002 (Pengeluaran)</option>
-        <option value="PL.003">PL.003 (Penerimaan)</option>
-        <option value="PL.004">PL.004 (Laporan Keuangan)</option>
-        <option value="PL.005">PL.005 (Audit)</option>
+        <option value="IP.001">IP.001 (Strategi Komunikasi Publik)</option>
+        <option value="IP.002">IP.002 (Evaluasi Komunikasi Publik)</option>
+      </optgroup>
+
+        <optgroup label="1. Publikasi dan Pelayanan Informasi">
+        <option value="IP.001">IP.001 (Rekaman)</option>
+        <option value="IP.002">IP.002 (Pameran)</option>
+        <option value="IP.003">IP.003 (Majalah)</option>
+        <option value="IP.004">IP.004 (Iklan)</option>
+        <option value="IP.005">IP.005 (Sosialisasi)</option>
+        <option value="IP.006">IP.006 (Pelayanan Informasi Publik)</option>
+      </optgroup>
+
+        <optgroup label="2. Media Massa, Media Sosial Opini Publik">
+        <option value="IP.001">IP.001 (Siaran Pers)</option>
+        <option value="IP.002">IP.002 (Peliputan Media Massa)</option>
+        <option value="IP.003">IP.003 (Monitoring Berita)</option>
+        <option value="IP.004">IP.004 (Publisitas)</option>
+        <option value="IP.005">IP.005 (Media Sosial)</option>
       </optgroup>
     </select>
+    <label for="kodeSM" id="labelKodeSM" style="display:none; margin-top: 15px;">Kode Klasifikasi SM Detail:</label>
+    <select id="kodeSM" name="kodeSM" style="display:none;">
+      <optgroup label="Pengembangan SDM">
+        <option value="SM.001">SM.001 (Pengembangan SDM Transportasi Darat)</option>
+        <option value="SM.002">SM.002 (Pengembangan SDM Transportasi Laut)</option>
+        <option value="SM.003">SM.003 (Pengembangan SDM Transportasi Udara)</option>
+        <option value="SM.004">SM.004 (Pengembangan SDM Perkeretaapian)</option>
+        <option value="SM.005">SM.005 (Pengembangan SDM Aparatur)</option>
+        <option value="SM.006">SM.006 (Pengembangan SDM Umum)</option>
+      </optgroup>
+      
+        <optgroup label="1. Diklat Dalam Negeri">
+        <option value="SM.101">SM.101 (Diklat Lemhanas)</option>
+        <option value="SM.102">SM.102 (Diklatpim Tk. I)</option>
+        <option value="SM.103">SM.103 (Diklatpim Tk. II)</option>
+        <option value="SM.104">SM.104 (Diklatpim Tk. III)</option>
+        <option value="SM.105">SM.105 (Diklatpim Tk. IV)</option>
+        <option value="SM.106">SM.106 (Penataran)</option>
+        <option value="SM.107">SM.107 (Kursus)</option>
+        <option value="SM.108">SM.108 (Diklat Umum, Beasiswa, Pascasarjana)</option>
+        <option value="SM.109">SM.109 (Seminar)</option>
+        <option value="SM.110">SM.110 (Orientasi)</option>
+        <option value="SM.111">SM.111 (Diklat Awal)</option>
+        <option value="SM.112">SM.112 (Diklat Fungsional)</option>
+        <option value="SM.113">SM.113 (Diklat Ketrampilan)</option>
+      </optgroup>
 
-    <label for="lembar">Lembar Surat:</label>
-    <input type="number" id="lembar" name="lembar" value="1" required>
+        <optgroup label="2. Diklat Luar Negeri">
+        <option value="SM.201">SM.201 (Diklat Transportasi Darat)</option>
+        <option value="SM.202">SM.202 (Diklat Transportasi Laut)</option>
+        <option value="SM.203">SM.203 (Diklat Transportasi Udara)</option>
+        <option value="SM.204">SM.204 (Diklat Perkeretaapian)</option>
+        <option value="SM.205">SM.205 (Diklat Umum,  Beasiswa, Pascasarjana)</option>
+        <option value="SM.206">SM.206 (Seminar, Lokakarya, Kongres, Konsferensi)</option>
+      </optgroup>
 
-    <label for="unit">Unit Pengirim:</label>
-    <input type="text" id="unit" name="unit" required>
+        <optgroup label="3. Umum">
+        <option value="SM.301">SM.301 (Laporan dan Evaluasi Pendidikan)</option>
+        <option value="SM.302">SM.302 (Wisuda)</option>
+        <option value="SM.303">SM.303 (Tenaga Pengajar)</option>
+        <option value="SM.304">SM.304 (Sertifikat/Ijazah)</option>
+      </optgroup>
 
-    <label for="judul">Judul Surat:</label>
-    <input type="text" id="judul" name="judul" required>
+      <optgroup label="4. Standarisasi">
+        <option value="SM.401">SM.401 (Standar Pendidikan)</option>
+        <option value="SM.402">SM.402 (Standar Pelatihan)</option>
+      </optgroup>
 
-    <button type="submit">Buat Nomor Surat</button>
-  </form>
+        <optgroup label="5. Ketarunaan">
+        <option value="SM.501">SM.501 (Penerimaan Calon Taruna)</option>
+        <option value="SM.502">SM.502 (Tata Tertib)</option>
+        <option value="SM.503">SM.503 (Kurikulum)</option>
+      </optgroup>
+    </select>
+    <label for="kodeAU" id="labelKodeAU" style="display:none; margin-top: 15px;">Kode Klasifikasi AU Detail:</label>
+    <select id="kodeAU" name="kodeAU" style="display:none;">
+      <optgroup label="Angkutan Udara">
+        <option value="AU.001">AU.001 (Angkutan Penumpang)</option>
+        <option value="AU.002">AU.002 (Angkutan Barang)</option>
+        <option value="AU.003">AU.003 (Data Bandar Udara)</option>
+        <option value="AU.004">AU.004 (Sistem Rute dan Jaringan)</option>
+        <option value="AU.005">AU.005 (Tarif Angkutan Penumpang)</option>
+        <option value="AU.006">AU.006 (Pelayanan Jasa)</option>
+        <option value="AU.007">AU.007 (Haji/Lebaran/Natal/Tahun Baru)</option>
+        <option value="AU.008">AU.008 (Lintas Batas)</option>
+        <option value="AU.009">AU.009 (Aie Lines)</option>
+        <option value="AU.010">AU.010 (Flight Approval)</option>
+        <option value="AU.011">AU.011 (Agreemen)</option>
+      </optgroup>
 
-  <h2>Daftar Surat</h2>
-  <label for="filterKode">Filter Kode:</label>
-  <input type="text" id="filterKode" placeholder="Masukkan kode, misal KP.001 atau KP" style="margin-bottom: 10px; padding: 5px; width: 200px;">
-  <table id="daftarSurat">
-    <thead>
-      <tr>
-        <th>No</th>
-        <th>Nomor Surat</th>
-        <th>Judul Surat</th>
-        <th>Tanggal & Waktu Keluar</th>
-        <th>Lembar</th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
+       <optgroup label="1. Bandar Udara">
+        <option value="AU.101">AU.101 (Sertifikat Personel dan Bandar Udara)</option>
+        <option value="AU.102">AU.102 (Pengembangan Bandar Udara)</option>
+        <option value="AU.103">AU.103 (Penetapan Lokasi)</option>
+        <option value="AU.104">AU.104 (Rencana Induk/Master Plan)</option>
+        <option value="AU.105">AU.105 (KKOP/BKK/DLKR/ dan Eco Airport)</option>
+        <option value="AU.106">AU.106 (Prasarana Bangunan)</option>
+        <option value="AU.107">AU.107 (Peralatan dan Utilitas)</option>
+        <option value="AU.108">AU.108 (Kerjasama dan Pengusahaan)</option>
+      </optgroup>
 
-  <button id="exportWord">Export ke Word</button>
-  <button id="hapusSemua" style="display:block; margin: 20px auto; padding: 10px; background-color: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer;">🗑️ Hapus Semua</button>
+       <optgroup label="2. Keamanan Penerbangan">
+        <option value="AU.201">AU.201 (Pengamanan Bandar Udara)</option>
+        <option value="AU.202">AU.202 (Pengamanan Operator Pesawat Udara)</option>
+        <option value="AU.203">AU.203 (Personil PKP-PK dan Salvage)</option>
+        <option value="AU.204">AU.204 (Teknis Pelayanan Darurat)</option>
+        <option value="AU.205">AU.205 (Sertifikat Personil Keamanan)</option>
+        <option value="AU.206">AU.206 (Izin Regulated Agent)</option>
+        <option value="AU.207">AU.207 (Barang-Barang Berbahaya (Dagerous Goods))</option>
+        <option value="AU.208">AU.208 (Kendaraan PKP-PK)</option>
+        <option value="AU.209">AU.209 (Pelatihan Peralatan X-Ray)</option>
+        <option value="AU.210">AU.210 (Keamanan Penerbangan)</option>
+        <option value="AU.211">AU.211 (Hasil Audit Keamanan Penerbangan)</option>
+      </optgroup>
 
-<script>
-const form = document.getElementById("formSurat");
-const tbody = document.querySelector("#daftarSurat tbody");
+       <optgroup label="3. Navigasi Penerbangan">
+        <option value="AU.301">AU.301 (Lalu Lintas Penerbangan/ATPM)</option>
+        <option value="AU.302">AU.302 (Air Traffik Service (ATS))</option>
+        <option value="AU.303">AU.303 (Kartografi Penerbangan)</option>
+        <option value="AU.304">AU.304 (Publikasi Informasi Aeronautika)</option>
+        <option value="AU.305">AU.305 (Frekuensi Radio Penerbangan)</option>
+        <option value="AU.306">AU.306 (Fasilitas Bantu Navigasi)</option>
+        <option value="AU.307">AU.307 (Standarisasi Navigasi Penerbangan)</option>
+        <option value="AU.308">AU.308 (Pembinaan Personil Navigasi Penerbangan)</option>
+        <option value="AU.309">AU.309 (Pengujian Lisensi Personil Navigasi Penerbangan)</option>
+        <option value="AU.310">AU.310 (Pengawasan Keselamatan Navigasi Penerbangan)</option>
+         <option value="AU.311">AU.311 (Inspektur Navigasi Penerbangan)</option>
+        <option value="AU.312">AU.312 (Data Keselamatan Navigasi)</option>
+        <option value="AU.313">AU.313 (Kecelakaan/Insiden Pesawat Udara)</option>
+        <option value="AU.314">AU.314 (Sertivikasi Navigasi Penerbangan)</option>
+        <option value="AU.315">AU.315 (Lembaga Penyelenggara Pelayanan Navigasi Penerbangan)</option>
+      </optgroup>
 
-let nomorUrutPerGroup = {};
-let jumlahSuratPerGroup = {};
-let isStartSetPerGroup = {};
+        <optgroup label="4. Kelaikudaraan dan Pengoperasian Pesawat Udara">
+        <option value="AU.401">AU.401 (Kecelakaan/Insiden Pesawat)</option>
+        <option value="AU.402">AU.402 (Pencabutan  Sertifikat)</option>
+        <option value="AU.403">AU.403 (Pelanggaran Uji Terbangan)</option>
+        <option value="AU.404">AU.404 (Uji Terbangan)</option>
+        <option value="AU.405">AU.405 (Perawatan Pesawat Udara)</option>
+        <option value="AU.406">AU.406 (Registrasi Pesawat Udara)</option>
+        <option value="AU.407">AU.407 (Kelaikan Pesawat)</option>
+        <option value="AU.408">AU.408 (Laporan/Progress Report)</option>
+        <option value="AU.409">AU.409 (Penjaminan Pesawat)</option>
+        <option value="AU.410">AU.410 (Izin Operasi Pesawat Udara)</option>
+        <option value="AU.411">AU.411 (Prefentive Grounding)</option>
+        <option value="AU.412">AU.412 (Release Grounding)</option>
+      </optgroup>
 
-function saveData() {
-  const rows = [];
-  tbody.querySelectorAll("tr").forEach(tr => {
-    const cells = tr.querySelectorAll("td");
-    rows.push({
-      nomorUrut: cells[0].textContent,
-      nomorSurat: cells[1].textContent,
-      judul: cells[2].textContent,
-      waktuLengkap: cells[3].textContent,
-      lembar: cells[4].textContent
-    });
-  });
-  localStorage.setItem("daftarSurat", JSON.stringify(rows));
-}
+        <optgroup label="5. Umum">
+         <option value="AU.401">AU.401 (Asuransi)</option>
+        <option value="AU.402">AU.402 (Asosiasi)</option>
+        <option value="AU.403">AU.403 (Satuan Pengamanan)</option>
+        <option value="AU.404">AU.404 (Rally Udara/Lomba)</option>
+        <option value="AU.405">AU.405 (Laporan Bulanan Bandar Udara)</option>
+        <option value="AU.406">AU.406 (SSP/PKPN (Program Keselamatan Penerbangan Nasional))</option>
+        <option value="AU.407">AU.407 (Proposal Inisiatif Baru)</option>
+        <option value="AU.408">AU.408 (SOP (Standard Operating Procedure))</option>
+        <option value="AU.409">AU.409 (ZOna Waktu)</option>
+      </optgroup>
+    </select>
+    
+      <label for="judul">Judul Surat:</label>
+      <input type="text" id="judul" name="judul" required />
+      <button type="submit">Buat Nomor Surat</button>
+    </form>
+    <div style="flex: 2; min-width: 400px; max-height: 600px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; border-radius: 8px; background: white;">
+      <h2>Daftar Surat</h2>
+      <label for="filterKode">Filter Kode:</label>
+      <input
+        type="text"
+        id="filterKode"
+        placeholder="Masukkan kode"
+        style="margin-bottom: 10px; padding: 5px; width: 200px"
+      />
+      <table id="daftarSurat" style="width: 100%;">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Nomor Surat</th>
+            <th>Judul Surat</th>
+            <th>Tanggal & Waktu Keluar</th>
+            <th>Lembar</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <button id="exportWord">Export ke Word</button>
+      <button
+        id="hapusSemua"
+        style="
+          display: block;
+          margin: 20px auto;
+          padding: 10px;
+          background-color: #dc3545;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        "
+      >
+        Hapus Semua
+      </button>
+    </div>
+  </div>
+  <script>
+    // Ambil elemen-elemen penting
+    const settinganToggle = document.getElementById("settinganToggle");
+    const settinganMenu = document.getElementById("settinganMenu");
+    const formSettingan = document.getElementById("formSettingan");
+    const settingStartNomor = document.getElementById("settingStartNomor");
+    const settingLembar = document.getElementById("settingLembar");
+    const settingUnit = document.getElementById("settingUnit");
 
-function loadData(filterKode = "") {
-  const data = localStorage.getItem("daftarSurat");
-  if (data) {
-    const rows = JSON.parse(data);
+    const formSurat = document.getElementById("formSurat");
+    const tbody = document.querySelector("#daftarSurat tbody");
 
-    // Group rows by full kode (including kode anak persoalan) before first slash
-    const grouped = {};
-    rows.forEach(row => {
-      const kode = row.nomorSurat.split('/')[0]; // full code like KP.001 or KP
-      if (!grouped[kode]) {
-        grouped[kode] = [];
+    let nomorUrutPerGroup = {};
+    let jumlahSuratPerGroup = {};
+
+    // Fungsi load settingan dari localStorage
+    function loadSettingan() {
+      const settingan = JSON.parse(localStorage.getItem("settinganNomorSurat"));
+      if (settingan) {
+        settingStartNomor.value = settingan.startNomor;
+        settingLembar.value = settingan.lembar;
+        settingUnit.value = settingan.unit;
+      } else {
+        settingStartNomor.value = 1;
+        settingLembar.value = 1;
+        settingUnit.value = "";
       }
-      grouped[kode].push(row);
+    }
+
+    // Fungsi toggle visibilitas kode anak persoalan
+    function toggleKodeDetail() {
+      const kodeSelect = document.getElementById("kode");
+      const kodeKPSelect = document.getElementById("kodeKP");
+      const labelKodeKP = document.getElementById("labelKodeKP");
+      const kodePRSelect = document.getElementById("kodePR");
+      const labelKodePR = document.getElementById("labelKodePR");
+      const kodeKUSelect = document.getElementById("kodeKU");
+      const labelKodeKU = document.getElementById("labelKodeKU");
+      const kodePLSelect = document.getElementById("kodePL");
+      const labelKodePL = document.getElementById("labelKodePL");
+
+      if (kodeSelect.value === "KP") {
+        kodeKPSelect.style.display = "block";
+        labelKodeKP.style.display = "block";
+        kodeKPSelect.required = true;
+      } else {
+        kodeKPSelect.style.display = "none";
+        labelKodeKP.style.display = "none";
+        kodeKPSelect.required = false;
+        kodeKPSelect.value = "";
+      }
+
+      if (kodeSelect.value === "PR") {
+        kodePRSelect.style.display = "block";
+        labelKodePR.style.display = "block";
+        kodePRSelect.required = true;
+      } else {
+        kodePRSelect.style.display = "none";
+        labelKodePR.style.display = "none";
+        kodePRSelect.required = false;
+        kodePRSelect.value = "";
+      }
+
+      if (kodeSelect.value === "KU") {
+        kodeKUSelect.style.display = "block";
+        labelKodeKU.style.display = "block";
+        kodeKUSelect.required = true;
+      } else {
+        kodeKUSelect.style.display = "none";
+        labelKodeKU.style.display = "none";
+        kodeKUSelect.required = false;
+        kodeKUSelect.value = "";
+      }
+
+      if (kodeSelect.value === "PL") {
+        kodePLSelect.style.display = "block";
+        labelKodePL.style.display = "block";
+        kodePLSelect.required = true;
+      } else {
+        kodePLSelect.style.display = "none";
+        labelKodePL.style.display = "none";
+        kodePLSelect.required = false;
+        kodePLSelect.value = "";
+      }
+    }
+
+    // Panggil toggleKodeDetail saat halaman dimuat dan saat kode berubah
+    window.addEventListener("load", () => {
+      toggleKodeDetail();
     });
 
-    // Update nomorUrutPerGroup and jumlahSuratPerGroup based on existing data
-    Object.keys(grouped).forEach(kode => {
-      const nomorUrutMax = grouped[kode].reduce((max, row) => {
-        const nomorUrut = parseInt(row.nomorUrut);
-        return nomorUrut > max ? nomorUrut : max;
-      }, 0);
-      nomorUrutPerGroup[kode] = nomorUrutMax + 1;
-      jumlahSuratPerGroup[kode] = grouped[kode].length;
+    document.getElementById("kode").addEventListener("change", () => {
+      toggleKodeDetail();
     });
 
-    // Clear tbody before rendering
-    tbody.innerHTML = "";
+    // Fungsi simpan settingan ke localStorage
+    function saveSettingan() {
+      const settingan = {
+        startNomor: parseInt(settingStartNomor.value) || 1,
+        lembar: parseInt(settingLembar.value) || 1,
+        unit: settingUnit.value.toUpperCase() || "",
+      };
+      localStorage.setItem("settinganNomorSurat", JSON.stringify(settingan));
+      return settingan;
+    }
 
-    // If filterKode is set, only show that group
-    const keysToShow = filterKode ? [filterKode] : Object.keys(grouped);
+    // Toggle menu settingan
+    settinganToggle.addEventListener("click", (e) => {
+      e.stopPropagation(); // cegah event bubbling supaya tidak langsung menutup menu
+      settinganMenu.classList.toggle("show");
+    });
 
-    keysToShow.forEach(kode => {
-      if (!grouped[kode]) return;
+    // Tutup menu settingan jika klik di luar menu dan tombol toggle
+    document.addEventListener("click", (e) => {
+      if (!settinganMenu.contains(e.target) && e.target !== settinganToggle) {
+        settinganMenu.classList.remove("show");
+      }
+    });
 
-        // Insert group header row
-        const headerTr = document.createElement("tr");
-        headerTr.classList.add("group-header");
-        headerTr.style.backgroundColor = "#d9eaff";
-        headerTr.style.fontWeight = "600";
-        headerTr.innerHTML = `<td colspan="5">Kode: ${kode}</td>`;
-        tbody.appendChild(headerTr);
+    // Simpan settingan dan tutup menu saat form settingan disubmit
+    formSettingan.addEventListener("submit", (e) => {
+      e.preventDefault();
+      saveSettingan();
+      settinganMenu.classList.remove("show");
+    });
 
-      grouped[kode].forEach(row => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${row.nomorUrut}</td>
-          <td>${row.nomorSurat}</td>
-          <td>${row.judul}</td>
-          <td>${row.waktuLengkap}</td>
-          <td>${row.lembar}</td>
-        `;
-        tbody.appendChild(tr);
+    // Fungsi load data surat dari localStorage dan render ke tabel
+    function loadData(filterKode = "") {
+      const data = localStorage.getItem("daftarSurat");
+      if (data) {
+        const rows = JSON.parse(data);
+
+        // Kelompokkan data berdasarkan kode lengkap (termasuk anak persoalan)
+        const grouped = {};
+        rows.forEach((row) => {
+          const kode = row.nomorSurat.split("/")[0];
+          if (!grouped[kode]) {
+            grouped[kode] = [];
+          }
+          grouped[kode].push(row);
+        });
+
+        // Update nomorUrutPerGroup dan jumlahSuratPerGroup
+        Object.keys(grouped).forEach((kode) => {
+          const nomorUrutMax = grouped[kode].reduce((max, row) => {
+            const nomorUrut = parseInt(row.nomorUrut);
+            return nomorUrut > max ? nomorUrut : max;
+          }, 0);
+          nomorUrutPerGroup[kode] = nomorUrutMax + 1;
+          jumlahSuratPerGroup[kode] = grouped[kode].length;
+        });
+
+        // Bersihkan tbody sebelum render ulang
+        tbody.innerHTML = "";
+
+        // Tentukan grup yang akan ditampilkan
+        const keysToShow = filterKode ? [filterKode] : Object.keys(grouped);
+
+        keysToShow.forEach((kode) => {
+          if (!grouped[kode]) return;
+
+          // Tambah baris header grup
+          const headerTr = document.createElement("tr");
+          headerTr.classList.add("group-header");
+          headerTr.style.backgroundColor = "#d9eaff";
+          headerTr.style.fontWeight = "600";
+          headerTr.innerHTML = `<td colspan="5">Kode: ${kode}</td>`;
+          tbody.appendChild(headerTr);
+
+          grouped[kode].forEach((row) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${row.nomorUrut}</td>
+              <td>${row.nomorSurat}</td>
+              <td>${row.judul}</td>
+              <td>${row.waktuLengkap}</td>
+              <td>${row.lembar}</td>
+            `;
+            tbody.appendChild(tr);
+          });
+        });
+      }
+    }
+
+    // Event submit form surat
+    formSurat.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const kode = formSurat.kode.value;
+      const kodeKP = formSurat.kodeKP.value;
+      const judul = formSurat.judul.value;
+      const now = new Date();
+
+      const tahun = now.getFullYear();
+      const tanggal = now.toISOString().split("T")[0];
+      const jam = now.getHours().toString().padStart(2, "0");
+      const menit = now.getMinutes().toString().padStart(2, "0");
+      const waktuLengkap = `${tanggal} ${jam}:${menit}`;
+
+      let kodeFinal = kode;
+      if (kode === "KP" && kodeKP) {
+        kodeFinal = kodeKP;
+      }
+
+      // Ambil settingan dari localStorage
+      const settingan =
+        JSON.parse(localStorage.getItem("settinganNomorSurat")) || {
+          startNomor: 1,
+          lembar: 1,
+          unit: "",
+        };
+
+      if (!nomorUrutPerGroup[kodeFinal]) {
+        nomorUrutPerGroup[kodeFinal] = settingan.startNomor;
+      }
+      if (!jumlahSuratPerGroup[kodeFinal]) {
+        jumlahSuratPerGroup[kodeFinal] = 0;
+      }
+
+      jumlahSuratPerGroup[kodeFinal]++;
+      const nomorUrut = nomorUrutPerGroup[kodeFinal]++;
+      const lembar = Math.ceil(jumlahSuratPerGroup[kodeFinal] / 9);
+
+      const nomorSurat = `${kodeFinal}/${lembar}/${nomorUrut}/${settingan.unit.toUpperCase()}-${tahun}`;
+
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${nomorUrut}</td>
+        <td>${nomorSurat}</td>
+        <td>${judul}</td>
+        <td>${waktuLengkap}</td>
+        <td>${lembar}</td>
+      `;
+
+      tbody.appendChild(tr);
+
+      formSurat.reset();
+      formSurat.kode.value = kodeFinal; // tetap pilih kode yang terakhir
+      saveData();
+    });
+
+    // Fungsi simpan data surat ke localStorage
+    function saveData() {
+      const rows = [];
+      tbody.querySelectorAll("tr").forEach((tr) => {
+        const cells = tr.querySelectorAll("td");
+        rows.push({
+          nomorUrut: cells[0].textContent,
+          nomorSurat: cells[1].textContent,
+          judul: cells[2].textContent,
+          waktuLengkap: cells[3].textContent,
+          lembar: cells[4].textContent,
+        });
       });
+      localStorage.setItem("daftarSurat", JSON.stringify(rows));
+    }
+
+    // Event listener untuk filter kode surat
+    document.getElementById("filterKode").addEventListener("input", (e) => {
+      loadData(e.target.value.trim().toUpperCase());
     });
 
-    // Set form startNomor and lembar based on first group or default
-    const firstGroup = keysToShow[0];
-    if (firstGroup && nomorUrutPerGroup[firstGroup]) {
-      form.startNomor.value = nomorUrutPerGroup[firstGroup];
-      form.lembar.value = Math.ceil(jumlahSuratPerGroup[firstGroup] / 9);
-    } else {
-      form.startNomor.value = 1;
-      form.lembar.value = 1;
-    }
-  }
-}
-
-form.addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const kode = form.kode.value;
-  const kodeKP = form.kodeKP.value;
-  const kodePR = form.kodePR.value;
-  const kodeKU = form.kodeKU.value;
-  const kodePL = form.kodePL.value;
-  const unit = form.unit.value.toUpperCase();
-  const judul = form.judul.value;
-  const now = new Date();
-
-  const tahun = now.getFullYear();
-  const tanggal = now.toISOString().split("T")[0];
-  const jam = now.getHours().toString().padStart(2, '0');
-  const menit = now.getMinutes().toString().padStart(2, '0');
-  const waktuLengkap = `${tanggal} ${jam}:${menit}`;
-
-  let kodeFinal = kode;
-  if (kode === "KP" && kodeKP) {
-    kodeFinal = kodeKP;
-  } else if (kode === "PR" && kodePR) {
-    kodeFinal = kodePR;
-  } else if (kode === "KU" && kodeKU) {
-    kodeFinal = kodeKU;
-  } else if (kode === "PL" && kodePL) {
-    kodeFinal = kodePL;
-  } else if (kode === "PM" && kodePM) {
-    kodeFinal = kodePM;
-  } else if (kode === "HK" && kodeHK) {
-    kodeFinal = kodeHK;
-  } else if (kode === "UM" && kodeUM) {
-    kodeFinal = kodeUM;
-  }
-
-  if (!nomorUrutPerGroup[kodeFinal]) {
-    nomorUrutPerGroup[kodeFinal] = parseInt(form.startNomor.value) || 1;
-  }
-  if (!jumlahSuratPerGroup[kodeFinal]) {
-    jumlahSuratPerGroup[kodeFinal] = 0;
-  }
-
-  jumlahSuratPerGroup[kodeFinal]++;
-  const nomorUrut = nomorUrutPerGroup[kodeFinal]++;
-  const lembar = Math.ceil(jumlahSuratPerGroup[kodeFinal] / 9);
-
-  const nomorSurat = `${kodeFinal}/${lembar}/${nomorUrut}/${unit}-${tahun}`;
-
-  const tr = document.createElement("tr");
-  tr.innerHTML = `
-    <td>${nomorUrut}</td>
-    <td>${nomorSurat}</td>
-    <td>${judul}</td>
-    <td>${waktuLengkap}</td>
-    <td>${lembar}</td>
-  `;
-
-  tbody.appendChild(tr);
-
-  form.reset();
-  form.startNomor.value = nomorUrutPerGroup[kodeFinal];
-  form.lembar.value = lembar;
-
-  saveData();
-});
-
-  document.getElementById("exportWord").addEventListener("click", function() {
-  const filterKode = document.getElementById("filterKode").value.trim();
-  const rows = document.querySelectorAll("#daftarSurat tbody tr");
-
-  let header = `
-    <html xmlns:o='urn:schemas-microsoft-com:office:office'
-          xmlns:w='urn:schemas-microsoft-com:office:word'
-          xmlns='http://www.w3.org/TR/REC-html40'>
-    <head><title>Export HTML to Word</title>
-  <style>
-      @page Section1 {
-        size:29.7cm 21cm;
-        mso-page-orientation:landscape;
-        margin:1.5cm;
+    // Event listener untuk tombol hapus semua
+    document.getElementById("hapusSemua").addEventListener("click", () => {
+      while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
       }
-      div.Section1 { page:Section1; }
-      table { width:100%; border-collapse:collapse; }
-      th, td { border:1px solid #000; padding:8px; text-align:left; line-height: 1.2; height: 1.2em; }
-      th { background-color:#eee; }
-      tr.group-header {
-        background-color: #d9eaff;
-        font-weight: 600;
+      localStorage.removeItem("daftarSurat");
+      nomorUrutPerGroup = {};
+      jumlahSuratPerGroup = {};
+    });
+
+    // Event listener untuk tombol export ke Word
+    document.getElementById("exportWord").addEventListener("click", () => {
+      const rows = tbody.querySelectorAll("tr:not(.group-header)");
+      let header = `
+        <html xmlns:o='urn:schemas-microsoft-com:office:office'
+              xmlns:w='urn:schemas-microsoft-com:office:word'
+              xmlns='http://www.w3.org/TR/REC-html40'>
+        <head><title>Export HTML to Word</title>
+        <style>
+          @page Section1 {
+            size:29.7cm 21cm;
+            mso-page-orientation:landscape;
+            margin:1cm;
+          }
+          div.Section1 { page:Section1; }
+          table { width:100%; border-collapse:collapse; }
+          th, td { border:1px solid #000; padding:8px; text-align:left; }
+          /* Remove background color from header */
+          th { background-color: transparent; }
+        </style>
+        </head><body>`;
+
+      let footer = "</body></html>";
+      let output = "";
+
+      // Add header text above the table
+      let indukMasalah = "";
+      let anakPersoalan = "";
+      let lembarKartu = 1;
+      if (rows.length > 0) {
+        const nomorSurat = rows[0].cells[1].textContent;
+        const kodeFinal = nomorSurat.split("/")[0];
+        const kodeParts = kodeFinal.split(".");
+        indukMasalah = kodeParts[0] || "";
+        anakPersoalan = kodeParts[1] || "";
+        lembarKartu = parseInt(rows[0].cells[4].textContent) || 1;
       }
-    </style>
-    </head><body>`;
 
-  let footer = "</body></html>";
-  let output = "";
-  let currentKode = "";
-  let currentLembar = 1;
-  let counter = 0;
-  let rowsExported = 0;
+      output += `<div style="margin-bottom: 10px;">
+        Induk Masalah : ${indukMasalah}<br/>
+        Anak Persoalan : ${anakPersoalan}<br/>
+        Lembar Kartu : ${lembarKartu}
+      </div>`;
 
-  for (let i = 0; i < rows.length; i++) {
-    // Skip group header rows in the table (they have class group-header)
-    if (rows[i].classList.contains("group-header")) {
-      continue;
-    }
+      let currentLembar = 1;
+      let counter = 0;
 
-    const nomorSurat = rows[i].cells[1].textContent;
-    const kode = nomorSurat.split('/')[0]; // full code including anak persoalan
-    const lembarRow = parseInt(rows[i].cells[4].textContent);
+      for (let i = 0; i < rows.length; i++) {
+        const lembarRow = parseInt(rows[i].cells[4].textContent);
 
-    // Only export rows matching the filterKode or if filterKode is empty export all
-    if (filterKode && kode !== filterKode) {
-      continue;
-    }
+        if (counter === 0 || counter === 9 || lembarRow !== currentLembar) {
+          if (counter !== 0) {
+            output += "</tbody></table><div style='page-break-before:always;'></div>";
+          }
+          output += `<div class="Section1"><table><thead><tr>
+            <th>No</th>
+            <th>Nomor Surat</th>
+            <th>Judul Surat</th>
+            <th>Tanggal & Waktu Keluar</th>
+          </tr></thead><tbody>`;
+          currentLembar = lembarRow;
+          counter = 0;
+        }
 
-    if (kode !== currentKode) {
-      if (counter !== 0) {
-        output += "</tbody></table><div style='page-break-before:always;'></div>";
+        output += `<tr>
+          <td>${rows[i].cells[0].textContent}</td>
+          <td>${rows[i].cells[1].textContent}</td>
+          <td>${rows[i].cells[2].textContent}</td>
+          <td>${rows[i].cells[3].textContent}</td>
+        </tr>`;
+
+        counter++;
       }
-      output += `<div class="Section1"><table><thead><tr>
-        <th colspan="4">Kode: ${kode}</th>
-      </tr></thead></table>`;
 
-      output += `<div class="Section1"><table><thead><tr>
-        <th>No</th>
-        <th>Nomor Surat</th>
-        <th>Judul Surat</th>
-        <th>Tanggal & Waktu Keluar</th>
-      </tr></thead><tbody>`;
+      output += "</tbody></table></div>";
+      const sourceHTML = header + output + footer;
 
-      currentKode = kode;
-      currentLembar = lembarRow;
-      counter = 0;
-    }
+      const source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+      const fileDownload = document.createElement("a");
+      document.body.appendChild(fileDownload);
+      fileDownload.href = source;
+      fileDownload.download = 'Riwayat_Surat.doc';
+      fileDownload.click();
+      document.body.removeChild(fileDownload);
+    });
 
-    if (counter === 9 || lembarRow !== currentLembar) {
-      output += "</tbody></table><div style='page-break-before:always;'></div>";
-      output += `<div class="Section1"><table><thead><tr>
-        <th>No</th>
-        <th>Nomor Surat</th>
-        <th>Judul Surat</th>
-        <th>Tanggal & Waktu Keluar</th>
-      </tr></thead><tbody>`;
-      currentLembar = lembarRow;
-      counter = 0;
-    }
-
-    output += `<tr>
-      <td>${rows[i].cells[0].textContent}</td>
-      <td>${rows[i].cells[1].textContent}</td>
-      <td>${rows[i].cells[2].textContent}</td>
-      <td>${rows[i].cells[3].textContent}</td>
-    </tr>`;
-
-    counter++;
-    rowsExported++;
-  }
-
-  output += "</tbody></table></div>";
-
-  if (rowsExported === 0) {
-    alert("Tidak ada data yang cocok dengan filter untuk diekspor.");
-    return;
-  }
-
-  const sourceHTML = header + output + footer;
-
-  const source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
-  const fileDownload = document.createElement("a");
-  document.body.appendChild(fileDownload);
-  fileDownload.style.display = 'none';
-  fileDownload.href = source;
-  fileDownload.download = 'Riwayat_Surat.doc';
-  fileDownload.click();
-  setTimeout(() => {
-    document.body.removeChild(fileDownload);
-  }, 100);
-});
-
-document.getElementById("hapusSemua").addEventListener("click", function() {
-  while (tbody.firstChild) {
-    tbody.removeChild(tbody.firstChild);
-  }
-  localStorage.removeItem("daftarSurat");
-  jumlahSurat = 0;
-  nomorUrut = 1;
-  form.startNomor.value = 1;
-  form.lembar.value = 1;
-});
-
-window.addEventListener("load", function() {
-  loadData();
-
-  // Show or hide kodeKP, kodePR, kodeKU selects based on kode select value
-  const kodeSelect = document.getElementById("kode");
-  const kodeKPSelect = document.getElementById("kodeKP");
-  const labelKodeKP = document.getElementById("labelKodeKP");
-  const kodePRSelect = document.getElementById("kodePR");
-  const labelKodePR = document.getElementById("labelKodePR");
-  const kodeKUSelect = document.getElementById("kodeKU");
-  const labelKodeKU = document.getElementById("labelKodeKU");
-  const kodePLSelect = document.getElementById("kodePL");
-  const labelKodePL = document.getElementById("labelKodePL");
-  const filterKodeInput = document.getElementById("filterKode");
-
-  function updateStartNomorAndLembar(kodeFinal) {
-    if (nomorUrutPerGroup[kodeFinal]) {
-      form.startNomor.value = nomorUrutPerGroup[kodeFinal];
-    } else {
-      form.startNomor.value = 1;
-    }
-    if (jumlahSuratPerGroup[kodeFinal]) {
-      form.lembar.value = Math.ceil(jumlahSuratPerGroup[kodeFinal] / 9);
-    } else {
-      form.lembar.value = 1;
-    }
-  }
-
-  function toggleKodeDetail() {
-    if (kodeSelect.value === "KP") {
-      kodeKPSelect.style.display = "block";
-      labelKodeKP.style.display = "block";
-      kodeKPSelect.required = true;
-      updateStartNomorAndLembar(kodeKPSelect.value || "KP.001");
-    } else {
-      kodeKPSelect.style.display = "none";
-      labelKodeKP.style.display = "none";
-      kodeKPSelect.required = false;
-      kodeKPSelect.value = "";
-    }
-
-    if (kodeSelect.value === "PR") {
-      kodePRSelect.style.display = "block";
-      labelKodePR.style.display = "block";
-      kodePRSelect.required = true;
-      updateStartNomorAndLembar(kodePRSelect.value || "PR.001");
-    } else {
-      kodePRSelect.style.display = "none";
-      labelKodePR.style.display = "none";
-      kodePRSelect.required = false;
-      kodePRSelect.value = "";
-    }
-
-    if (kodeSelect.value === "KU") {
-      kodeKUSelect.style.display = "block";
-      labelKodeKU.style.display = "block";
-      kodeKUSelect.required = true;
-      updateStartNomorAndLembar(kodeKUSelect.value || "KU.001");
-    } else {
-      kodeKUSelect.style.display = "none";
-      labelKodeKU.style.display = "none";
-      kodeKUSelect.required = false;
-      kodeKUSelect.value = "";
-    }
-    if (kodeSelect.value === "PL") {
-      kodePLSelect.style.display = "block";
-      labelKodePL.style.display = "block";
-      kodePLSelect.required = true;
-      updateStartNomorAndLembar(kodePLSelect.value || "PL.001");
-    } else {
-      kodePLSelect.style.display = "none";
-      labelKodePL.style.display = "none";
-      kodePLSelect.required = false;
-      kodePLSelect.value = "";
-    }
-    if (!["KP", "PR", "KU", "PL"].includes(kodeSelect.value)) {
-      updateStartNomorAndLembar(kodeSelect.value);
-    }
-  }
-
-  kodeSelect.addEventListener("change", () => {
-    toggleKodeDetail();
-    // Update filter input and reload list based on selected kode anak persoalan or kode utama
-    let kodeFinal = kodeSelect.value;
-    if (kodeFinal === "KP" && kodeKPSelect.value) {
-      kodeFinal = kodeKPSelect.value;
-    } else if (kodeFinal === "PR" && kodePRSelect.value) {
-      kodeFinal = kodePRSelect.value;
-    } else if (kodeFinal === "KU" && kodeKUSelect.value) {
-      kodeFinal = kodeKUSelect.value;
-    } else if (kodeFinal === "PL" && kodePLSelect.value) {
-      kodeFinal = kodePLSelect.value;
-    }
-    filterKodeInput.value = kodeFinal;
-    loadData(kodeFinal);
-  });
-  kodeKPSelect.addEventListener("change", () => {
-    updateStartNomorAndLembar(kodeKPSelect.value);
-    filterKodeInput.value = kodeKPSelect.value;
-    loadData(kodeKPSelect.value);
-  });
-  kodePRSelect.addEventListener("change", () => {
-    updateStartNomorAndLembar(kodePRSelect.value);
-    filterKodeInput.value = kodePRSelect.value;
-    loadData(kodePRSelect.value);
-  });
-  kodeKUSelect.addEventListener("change", () => {
-    updateStartNomorAndLembar(kodeKUSelect.value);
-    filterKodeInput.value = kodeKUSelect.value;
-    loadData(kodeKUSelect.value);
-  });
-  kodePLSelect.addEventListener("change", () => {
-    updateStartNomorAndLembar(kodePLSelect.value);
-    filterKodeInput.value = kodePLSelect.value;
-    loadData(kodePLSelect.value);
-  });
-
-  filterKodeInput.addEventListener("input", () => {
-    loadData(filterKodeInput.value.trim());
-  });
-
-  toggleKodeDetail();
-
-});
-</script>
-
+    // Load data saat halaman dimuat
+    window.addEventListener("load", () => {
+      loadSettingan();
+      loadData();
+    });
+  </script>
 </body>
 </html>
