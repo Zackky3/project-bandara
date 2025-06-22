@@ -280,7 +280,32 @@
     </div>
     <div id="settinganMenu" aria-label="Menu Settingan">
       <h3>Settingan Nomor Surat</h3>
-      <form id="formSettingan">
+    <form id="formSettingan">
+        <label for="settingKode">Kode Klasifikasi / Anak Persoalan:</label>
+        <input list="kodeList" id="settingKode" name="settingKode" required />
+        <datalist id="kodeList">
+          <option value="KP">KP (Kepegawaian)</option>
+          <option value="PR">PR (Perencanaan)</option>
+          <option value="KU">KU (Keuangan)</option>
+          <option value="PL">PL (Perlengkapan)</option>
+          <option value="HK">HK (Hukum)</option>
+          <option value="UM">UM (Umum)</option>
+          <option value="IP">IP (Informasi Publik)</option>
+          <option value="SM">SM (Pengembangan SDM)</option>
+          <option value="AU">AU (Angkutan Udara)</option>
+          <!-- Add anak persoalan codes for each klasifikasi -->
+          <option value="KP.001">KP.001 (Data Kepegawaian)</option>
+          <option value="KP.002">KP.002 (Identitas Pegawai)</option>
+          <option value="PR.001">PR.001 (Kementrian)</option>
+          <option value="PR.002">PR.002 (Transportasi Darat)</option>
+          <option value="KU.001">KU.001 (Perencanaan Anggaran)</option>
+          <option value="PL.001">PL.001 (Analisis Data)</option>
+          <option value="HK.001">HK.001 (Undung-Undang Negara)</option>
+          <option value="UM.001">UM.001 (Kearsipan)</option>
+          <option value="IP.001">IP.001 (Strategi Komunikasi Publik)</option>
+          <option value="SM.001">SM.001 (Pengembangan SDM Transportasi Darat)</option>
+          <option value="AU.001">AU.001 (Angkutan Penumpang)</option>
+        </datalist>
         <label for="settingStartNomor">Nomor Surat:</label>
         <input type="number" id="settingStartNomor" name="settingStartNomor" min="1" required />
         <label for="settingLembar">Lembar Surat:</label>
@@ -301,7 +326,6 @@
         <option value="PR">PR (Perencanaan)</option>
         <option value="KU">KU (Keuangan)</option>
         <option value="PL">PL (Perlengkapan)</option>
-        <option value="PM">PM (Penanaman Modal)</option>
         <option value="HK">HK (Hukum)</option>
         <option value="UM">UM (Umum)</option>
         <option value="IP">IP (Informasi Publik)</option>
@@ -407,7 +431,7 @@
           </optgroup>
         </optgroup>
       </select>
-      <label for="kodePR" id="labelKodePR" style="display:none; margin-top: 15px;">Kode Klasifikasi PR Detail:</label>
+      <label for="kodePR" id="labelKodePR" style="display:none; margin-top: 15px;">Kode Anak Persoalan:</label>
       <select id="kodePR" name="kodePR" style="display:none;">
         <optgroup label="Perencanaan">
           <option value="PR.001">PR.001 (Kementrian)</option>
@@ -446,7 +470,7 @@
           <option value="PR.306">PR.306 (Penunjang)</option>
         </optgroup>
       </select>
-      <label for="kodeKU" id="labelKodeKU" style="display:none; margin-top: 15px;">Kode Klasifikasi KU Detail:</label>
+      <label for="kodeKU" id="labelKodeKU" style="display:none; margin-top: 15px;">Kode Anak Persoalan:</label>
       <select id="kodeKU" name="kodeKU" style="display:none;">
         <optgroup label="Keuangan">
           <option value="KU.001">KU.001 (Perencanaan Anggaran)</option>
@@ -492,7 +516,7 @@
           <option value="KU.504">KU.504 (Tuntutan Perbendaharaan)</option>
         </optgroup>
       </select>
-      <label for="kodePL" id="labelKodePL" style="display:none; margin-top: 15px;">Kode Klasifikasi PL Detail:</label>
+      <label for="kodePL" id="labelKodePL" style="display:none; margin-top: 15px;">Kode Anak Persoalan:</label>
       <select id="kodePL" name="kodePL" style="display:none;">
         <optgroup label="Perlengkapan">
           <option value="PL.001">PL.001 (Analisis Data)</option>
@@ -536,7 +560,7 @@
           <option value="PL.106">PL.106 (Tukar Guling)</option>
         </optgroup>
       </select>
-      <label for="kodeHK" id="labelKodeHK" style="display:none; margin-top: 15px;">Kode Klasifikasi HK Detail:</label>
+      <label for="kodeHK" id="labelKodeHK" style="display:none; margin-top: 15px;">Kode Anak Persoalan:</label>
       <select id="kodeHK" name="kodeHK" style="display:none;">
         <optgroup label="Hukum">
           <option value="HK.001">HK.001 (Undung-Undang Negara)</option>
@@ -600,7 +624,7 @@
           <option value="HK.706">HK.706 (Despensasi)</option>
         </optgroup>
       </select>
-      <label for="kodeUM" id="labelKodeUM" style="display:none; margin-top: 15px;">Kode Klasifikasi UM Detail:</label>
+      <label for="kodeUM" id="labelKodeUM" style="display:none; margin-top: 15px;">Kode Anak Persoalan:</label>
       <select id="kodeUM" name="kodeUM" style="display:none;">
         <optgroup label="Umum">
           <option value="UM.001">UM.001 (Kearsipan)</option>
@@ -639,7 +663,7 @@
           <option value="UM.303">UM.303 (Sumbangan)</option>
         </optgroup>
       </select>
-       <label for="kodeIP" id="labelKodeIP" style="display:none; margin-top: 15px;">Kode Klasifikasi IP Detail:</label>
+       <label for="kodeIP" id="labelKodeIP" style="display:none; margin-top: 15px;">Kode Anak Persoalan:</label>
     <select id="kodeIP" name="kodeIP" style="display:none;">
       <optgroup label="Perlengkapan">
         <option value="IP.001">IP.001 (Strategi Komunikasi Publik)</option>
@@ -663,7 +687,7 @@
         <option value="IP.005">IP.005 (Media Sosial)</option>
       </optgroup>
     </select>
-    <label for="kodeSM" id="labelKodeSM" style="display:none; margin-top: 15px;">Kode Klasifikasi SM Detail:</label>
+    <label for="kodeSM" id="labelKodeSM" style="display:none; margin-top: 15px;">Kode Anak Persoalan:</label>
     <select id="kodeSM" name="kodeSM" style="display:none;">
       <optgroup label="Pengembangan SDM">
         <option value="SM.001">SM.001 (Pengembangan SDM Transportasi Darat)</option>
@@ -717,7 +741,7 @@
         <option value="SM.503">SM.503 (Kurikulum)</option>
       </optgroup>
     </select>
-    <label for="kodeAU" id="labelKodeAU" style="display:none; margin-top: 15px;">Kode Klasifikasi AU Detail:</label>
+    <label for="kodeAU" id="labelKodeAU" style="display:none; margin-top: 15px;">Kode Anak Persoalan:</label>
     <select id="kodeAU" name="kodeAU" style="display:none;">
       <optgroup label="Angkutan Udara">
         <option value="AU.001">AU.001 (Angkutan Penumpang)</option>
@@ -864,7 +888,13 @@
 
     // Fungsi load settingan dari localStorage
     function loadSettingan() {
-      const settingan = JSON.parse(localStorage.getItem("settinganNomorSurat"));
+      const kode = document.getElementById("settingKode").value;
+      const allSettingan = JSON.parse(localStorage.getItem("settinganNomorSurat")) || {};
+      let settingan = allSettingan[kode];
+      if (!settingan && kode.includes(".")) {
+        const parentKode = kode.split(".")[0];
+        settingan = allSettingan[parentKode];
+      }
       if (settingan) {
         settingStartNomor.value = settingan.startNomor;
         settingLembar.value = settingan.lembar;
@@ -874,10 +904,17 @@
         settingLembar.value = 1;
         settingUnit.value = "";
       }
+      // Simpan nomor surat settingan ke localStorage terpisah untuk kontrol lebih mudah
+      localStorage.setItem("nomorSuratSetting", settingStartNomor.value);
+    }
+
+    // Fungsi simpan nomor surat settingan secara terpisah
+    function saveNomorSuratSetting() {
+      localStorage.setItem("nomorSuratSetting", settingStartNomor.value);
     }
 
     // Fungsi toggle visibilitas kode anak persoalan
-    function toggleKodeDetail() {
+        function toggleKodeDetail() {
       const kodeSelect = document.getElementById("kode");
       const kodeKPSelect = document.getElementById("kodeKP");
       const labelKodeKP = document.getElementById("labelKodeKP");
@@ -887,6 +924,16 @@
       const labelKodeKU = document.getElementById("labelKodeKU");
       const kodePLSelect = document.getElementById("kodePL");
       const labelKodePL = document.getElementById("labelKodePL");
+      const kodeHKSelect = document.getElementById("kodeHK");
+      const labelKodeHK = document.getElementById("labelKodeHK");
+      const kodeUMSelect = document.getElementById("kodeUM");
+      const labelKodeUM = document.getElementById("labelKodeUM");
+      const kodeIPSelect = document.getElementById("kodeIP");
+      const labelKodeIP = document.getElementById("labelKodeIP");
+      const kodeSMSelect = document.getElementById("kodeSM");
+      const labelKodeSM = document.getElementById("labelKodeSM");
+      const kodeAUSelect = document.getElementById("kodeAU");
+      const labelKodeAU = document.getElementById("labelKodeAU");
 
       if (kodeSelect.value === "KP") {
         kodeKPSelect.style.display = "block";
@@ -931,6 +978,61 @@
         kodePLSelect.required = false;
         kodePLSelect.value = "";
       }
+
+       if (kodeSelect.value === "HK") {
+        kodeHKSelect.style.display = "block";
+        labelKodeHK.style.display = "block";
+        kodeHKSelect.required = true;
+      } else {
+        kodeHKSelect.style.display = "none";
+        labelKodeHK.style.display = "none";
+        kodeHKSelect.required = false;
+        kodeHKSelect.value = "";
+      }
+      
+       if (kodeSelect.value === "UM") {
+        kodeUMSelect.style.display = "block";
+        labelKodeUM.style.display = "block";
+        kodeUMSelect.required = true;
+      } else {
+        kodeUMSelect.style.display = "none";
+        labelKodeUM.style.display = "none";
+        kodeUMSelect.required = false;
+        kodeUMSelect.value = "";
+      }
+      
+       if (kodeSelect.value === "IP") {
+        kodeIPSelect.style.display = "block";
+        labelKodeIP.style.display = "block";
+        kodeIPSelect.required = true;
+      } else {
+        kodeIPSelect.style.display = "none";
+        labelKodeIP.style.display = "none";
+        kodeIPSelect.required = false;
+        kodeIPSelect.value = "";
+      }
+      
+       if (kodeSelect.value === "SM") {
+        kodeSMSelect.style.display = "block";
+        labelKodeSM.style.display = "block";
+        kodeSMSelect.required = true;
+      } else {
+        kodeSMSelect.style.display = "none";
+        labelKodeSM.style.display = "none";
+        kodeSMSelect.required = false;
+        kodeSMSelect.value = "";
+      }
+      
+       if (kodeSelect.value === "AU") {
+        kodeAUSelect.style.display = "block";
+        labelKodeAU.style.display = "block";
+        kodeAUSelect.required = true;
+      } else {
+        kodeAUSelect.style.display = "none";
+        labelKodeAU.style.display = "none";
+        kodeAUSelect.required = false;
+        kodeAUSelect.value = "";
+      }
     }
 
     // Panggil toggleKodeDetail saat halaman dimuat dan saat kode berubah
@@ -940,16 +1042,34 @@
 
     document.getElementById("kode").addEventListener("change", () => {
       toggleKodeDetail();
+      // Sinkronisasi kode klasifikasi form dengan settingan
+      const kodeForm = document.getElementById("kode").value;
+      const settingKodeSelect = document.getElementById("settingKode");
+      if (settingKodeSelect.value !== kodeForm) {
+        settingKodeSelect.value = kodeForm;
+        loadSettingan();
+      }
     });
 
     // Fungsi simpan settingan ke localStorage
     function saveSettingan() {
+      const kode = document.getElementById("settingKode").value;
+      const allSettingan = JSON.parse(localStorage.getItem("settinganNomorSurat")) || {};
       const settingan = {
         startNomor: parseInt(settingStartNomor.value) || 1,
         lembar: parseInt(settingLembar.value) || 1,
         unit: settingUnit.value.toUpperCase() || "",
       };
-      localStorage.setItem("settinganNomorSurat", JSON.stringify(settingan));
+      allSettingan[kode] = settingan;
+      localStorage.setItem("settinganNomorSurat", JSON.stringify(allSettingan));
+
+      // Reset nomorUrutPerGroup and jumlahSuratPerGroup to apply new settings
+      nomorUrutPerGroup = {};
+      jumlahSuratPerGroup = {};
+
+      // Reload data to apply new numbering
+      loadData();
+
       return settingan;
     }
 
@@ -969,8 +1089,16 @@
     // Simpan settingan dan tutup menu saat form settingan disubmit
     formSettingan.addEventListener("submit", (e) => {
       e.preventDefault();
-      saveSettingan();
+      const savedSetting = saveSettingan();
+      // Update nomorUrutPerGroup dengan startNomor terbaru setelah simpan settingan
+      const kode = document.getElementById("settingKode").value;
+      nomorUrutPerGroup[kode] = savedSetting.startNomor;
       settinganMenu.classList.remove("show");
+    });
+
+    // Load settingan saat kode klasifikasi di settingan berubah
+    document.getElementById("settingKode").addEventListener("change", () => {
+      loadSettingan();
     });
 
     // Fungsi load data surat dari localStorage dan render ke tabel
@@ -1035,7 +1163,22 @@
       formSurat.addEventListener("submit", (e) => {
       e.preventDefault();
 
+      // Reload settingan from localStorage to get latest startNomor and lembar
       const kode = formSurat.kode.value;
+      const allSettingan = JSON.parse(localStorage.getItem("settinganNomorSurat")) || {};
+      let settingan = allSettingan[kode];
+      if (!settingan && kode.includes(".")) {
+        const parentKode = kode.split(".")[0];
+        settingan = allSettingan[parentKode];
+      }
+      if (!settingan) {
+        settingan = {
+          startNomor: 1,
+          lembar: 1,
+          unit: "",
+        };
+      }
+
       const kodeKP = formSurat.kodeKP.value;
       const kodePR = formSurat.kodePR.value;
       const kodeKU = formSurat.kodeKU.value;
@@ -1075,14 +1218,6 @@
         kodeFinal = kodeAU;
       }
 
-      // Ambil settingan dari localStorage
-      const settingan =
-        JSON.parse(localStorage.getItem("settinganNomorSurat")) || {
-          startNomor: 1,
-          lembar: 1,
-          unit: "",
-        };
-
       if (!nomorUrutPerGroup[kodeFinal]) {
         nomorUrutPerGroup[kodeFinal] = settingan.startNomor;
       }
@@ -1090,9 +1225,13 @@
         jumlahSuratPerGroup[kodeFinal] = 0;
       }
 
+      // Pastikan unit pengirim mengikuti settingan terbaru
+      settingan.unit = settingan.unit.toUpperCase();
+
       jumlahSuratPerGroup[kodeFinal]++;
       const nomorUrut = nomorUrutPerGroup[kodeFinal]++;
-      const lembar = Math.ceil(jumlahSuratPerGroup[kodeFinal] / 9);
+      // Use the user setting for lembar in calculation instead of hardcoded 9
+      const lembar = Math.ceil(nomorUrut / 9);
 
       const nomorSurat = `${kodeFinal}/${lembar}/${nomorUrut}/${settingan.unit.toUpperCase()}-${tahun}`;
 
